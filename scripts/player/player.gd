@@ -9,11 +9,17 @@ class_name Player extends CharacterBody2D
 @export var damage:float = 50.0
 @export var max_energy:float = 100.0
 @export var energy:float = 100.0
-@export var attackCooldown: float = 0.5
+@export var attackCooldown: float = 1.0
 
 @export var dashCooldown: float = 1.0
 
+@export var projectile_speed:float = 700.0
+
+@export var ice: PackedScene = preload("res://scenes/projectiles/ice.tscn")
+
 var dashCooldownTimer: float = 0.0
+
+var attackCooldownTimer: float = 0.0
 
 var direction: Vector2 = Vector2.ZERO
 enum Dir {DOWN, SIDE, UP}
@@ -29,12 +35,17 @@ func _process(_delta):
 	
 	if(dashCooldownTimer > 0.0):
 		dashCooldownTimer -= _delta
+	if(attackCooldownTimer > 0.0):
+		attackCooldownTimer -= _delta
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func resetDashTimer():
 	dashCooldownTimer = dashCooldown
+
+func resetAttackTimer():
+	attackCooldownTimer = attackCooldown
 
 func setMoveAnimation():
 	if(direction.x):
@@ -72,3 +83,13 @@ func setDashAnimation():
 
 func setAttackAnimation():
 	sprite.play("Attack")
+
+func shoot(dir:Vector2):
+	var projectile = ice.instantiate()
+	get_parent().add_child(projectile)
+	projectile.global_position = global_position
+	projectile.direction = dir
+	projectile.speed = projectile_speed
+	projectile.rotation = dir.angle()
+	resetAttackTimer()
+	

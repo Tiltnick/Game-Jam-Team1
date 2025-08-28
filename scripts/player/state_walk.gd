@@ -28,6 +28,6 @@ func handleInput(_event:InputEvent) -> State:
 	if(_event.is_action_pressed("dash") && player.dashCooldownTimer <= 0.0):
 		return dash
 	
-	if _event.is_action_pressed("interact"):
+	if (_event.is_action_pressed("interact") && player.attackCooldownTimer <= 0.0):
 		return attack
 	return null

@@ -5,7 +5,7 @@ var attackTimer:float = 0.0
 
 func enter() -> void:
 	player.setAttackAnimation()
-	attackTimer = 0.5
+	attackTimer = 0.3
 	player.velocity = Vector2.ZERO
 	var mousePos = get_viewport().get_mouse_position()
 	var mouseWorld = mousePos - screen_center 
@@ -14,6 +14,7 @@ func enter() -> void:
 		player.sprite.flip_h = false
 	else:
 		player.sprite.flip_h = true
+	player.shoot(relative.normalized())
 	print("PlayerPos: " + str(player.position))
 	print("mousePos: " + str(mousePos))
 	print("relative: " + str(relative))
