@@ -1,13 +1,16 @@
-[gd_scene load_steps=19 format=4 uid="uid://chi3yp36d6iuj"]
+[gd_scene load_steps=23 format=4 uid="uid://chi3yp36d6iuj"]
 
 [ext_resource type="Texture2D" uid="uid://btblf13vw5m5p" path="res://assets/dungeon.png" id="2_tqkkf"]
 [ext_resource type="Texture2D" uid="uid://plekkyy5ap20" path="res://assets/treasure-chest.png" id="3_a2pkv"]
+[ext_resource type="Script" uid="uid://dm4mdhjqlu178" path="res://scripts/BaseChest/base_health.gd" id="3_vvrx0"]
+[ext_resource type="Script" uid="uid://bd18keob0jfma" path="res://scripts/BaseChest/chest_hp_bar.gd" id="4_b56te"]
 [ext_resource type="Texture2D" uid="uid://b1n6gte7g5yhj" path="res://assets/dungeon-ghost.png" id="4_fcby6"]
 [ext_resource type="Texture2D" uid="uid://dwdy5huex7j36" path="res://assets/treasure-chest-ghost.png" id="5_jcaow"]
 [ext_resource type="PackedScene" uid="uid://d4bwkomgkcikx" path="res://scenes/player/Player.tscn" id="6_04w0f"]
 [ext_resource type="PackedScene" uid="uid://jvus7ev4ut28" path="res://scenes/health/health.tscn" id="6_sqgf4"]
 [ext_resource type="PackedScene" uid="uid://bobx66c843jrx" path="res://scenes/enemies/slime.tscn" id="7_04w0f"]
 [ext_resource type="PackedScene" uid="uid://cyjo73r37gque" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
+[ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sqgf4"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -627,6 +630,9 @@ texture = ExtResource("3_a2pkv")
 navigation_layer_0/layers = 2
 sources/0 = SubResource("TileSetAtlasSource_04w0f")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b56te"]
+size = Vector2(38, 36)
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sqgf4"]
 texture = ExtResource("4_fcby6")
 0:0/0 = 0
@@ -1192,6 +1198,18 @@ scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAD///7/AAABAAEAAAD/////AAABAAIAAAD//wAAAAABAAMAAAAAAP7/AAACAAEAAAAAAP//AAACAAIAAAAAAAAAAAACAAMAAAA=")
 tile_set = SubResource("TileSet_ph54e")
 
+[node name="ChestTarget" type="Area2D" parent="Chest" groups=["Base"]]
+collision_layer = 9
+collision_mask = 5
+script = ExtResource("3_vvrx0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest/ChestTarget"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_b56te")
+
+[node name="ChestHPBar" type="Node2D" parent="Chest/ChestTarget"]
+script = ExtResource("4_b56te")
+
 [node name="Collision" type="StaticBody2D" parent="."]
 
 [node name="Bottom" type="CollisionPolygon2D" parent="Collision"]
@@ -1230,4 +1248,13 @@ navigation_polygon = SubResource("NavigationPolygon_04w0f")
 
 [node name="EnemySlimeSpawner" parent="." instance=ExtResource("8_sqgf4")]
 slime_scene = ExtResource("7_04w0f")
-target_path = NodePath("../Chest")
+target_path = NodePath("../Chest/ChestTarget")
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("10_f17u5")
+
+[node name="ChestHPLabel" type="Label" parent="UI"]
+offset_left = -20.0
+offset_top = -75.0
+offset_right = 20.0
+offset_bottom = -52.0

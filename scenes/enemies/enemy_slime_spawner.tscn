@@ -4,8 +4,8 @@
 script/source = "extends Node2D
 
 @export var slime_scene: PackedScene
-@export var spawn_interval: float = 3
-@export var target_path: NodePath
+@export var spawn_interval: float = 3.0
+@export var target_path: NodePath   #Target patg ist ChestTarget
 
 @onready var timer: Timer = $Timer
 @onready var target: Node2D = get_node_or_null(target_path)
@@ -14,34 +14,48 @@ var spawn_points: Array[Marker2D] = []
 
 func _ready() -> void:
 	randomize()
+
+	# Fallback auf node Szenengruppe \"Base\"
 	if target == null:
-		# z. B. Marker2D/Area2D in der Kistenmitte in Gruppe \"base\" stecken
 		target = get_tree().get_first_node_in_group(\"base\") as Node2D
+
+	#Falls target \"died\" stoppt das spawnen
+	if target and target.has_signal(\"died\"):
+		var cb := Callable(self, \"_on_base_died\")
+		if not target.is_connected(\"died\", cb):
+			target.connect(\"died\", cb)
+	print(\"Spawner target:\", target)
 
 	for c in get_children():
 		if c is Marker2D:
 			spawn_points.append(c)
 
 	timer.wait_time = spawn_interval
-	timer.timeout.connect(_on_timer_timeout)
+	if not timer.timeout.is_connected(_on_timer_timeout):
+		timer.timeout.connect(_on_timer_timeout)
 	timer.start()
 
 func _on_timer_timeout() -> void:
-	if spawn_points.is_empty():
+	if spawn_points.is_empty() or slime_scene == null:
 		return
 
 	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
 	var slime = slime_scene.instantiate()
 	slime.global_position = spawn.global_position
 
-	# Erst in den Tree (damit _ready() und @onready laufen)
 	get_tree().current_scene.add_child(slime)
 
-	# Danach Ziel setzen
 	if slime.has_method(\"set_target\") and target:
 		slime.set_target(target)
 	else:
-		print(\"WARN: Kein Target gesetzt oder Slime hat set_target nicht.\")
+		push_warning(\"Slime hat keine set_target()-Methode/target fehlt\")
+
+func _on_base_died() -> void:
+	timer.stop()
+	print(\"Spawner stopped: base died.\")
+	# Gegner entfernen wenn \"base died\"
+	for e in get_tree().get_nodes_in_group(\"enemy\"):
+		e.queue_free()
 "
 
 [node name="EnemySlimeSpawner" type="Node2D"]
