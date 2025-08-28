@@ -11,6 +11,9 @@ class_name Player extends CharacterBody2D
 @export var energy:float = 100.0
 @export var attackCooldown: float = 0.5
 
+@export var dashCooldown: float = 1.0
+
+var dashTimer: float = 0.0
 
 var direction: Vector2 = Vector2.ZERO
 enum Dir {DOWN, SIDE, UP}
@@ -20,12 +23,12 @@ var isFacing = Dir.DOWN
 func _ready():
 	stateMachine.initialize(self)
 
-func _process(delta):
+func _process(_delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
