@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="PotionPickup" load_steps=3 format=3 uid="uid://bgo87hnekokhe"]
 
 [ext_resource type="Script" uid="uid://dsi6huvk01akg" path="res://scripts/collectables/potions/PotionPickup.gd" id="1_heqbs"]
-[ext_resource type="Texture2D" uid="uid://b7xvvudp1h6v0" path="res://assets/collectables/potions/healthPotion-Red.png" id="2_kemkc"]
+[ext_resource type="Texture2D" uid="uid://b7xvvudp1h6v0" path="res://assets/healthPotion-Red.png" id="2_heqbs"]
 
 [resource]
 script = ExtResource("1_heqbs")
 type = "\"Heal\""
 amount = 10.0
-texture = ExtResource("2_kemkc")
+texture = ExtResource("2_heqbs")
 metadata/_custom_type_script = "uid://dsi6huvk01akg"
