@@ -3,7 +3,7 @@ class_name Player extends CharacterBody2D
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var stateMachine:PlayerStateMachine = $StateMachine
 @export var moveSpeed:float = 200.0
-@export var max_health:float = 20.0
+@export var max_health:float = 19.0
 @export var health: float = 10.0
 @export var attackSpeed:float = 50.0
 @export var damage:float = 50.0
