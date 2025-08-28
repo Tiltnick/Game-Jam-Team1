@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PotionPickup" load_steps=3 format=3 uid="uid://ccy2nba33yei3"]
 
 [ext_resource type="Script" uid="uid://dsi6huvk01akg" path="res://scripts/collectables/potions/PotionPickup.gd" id="1_gkv0e"]
-[ext_resource type="Texture2D" uid="uid://x7dyw1v70xr4" path="res://assets/collectables/potions/dmgPotion-Orange.png" id="2_iaqsl"]
+[ext_resource type="Texture2D" uid="uid://x7dyw1v70xr4" path="res://assets/dmgPotion-Orange.png" id="2_iaqsl"]
 
 [resource]
 script = ExtResource("1_gkv0e")
