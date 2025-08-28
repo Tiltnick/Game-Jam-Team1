@@ -5,9 +5,9 @@
 
 [node name="Main" type="Node2D"]
 
+[node name="Health" parent="." instance=ExtResource("2_rvslj")]
+
 [node name="Player" parent="." instance=ExtResource("1_elqb8")]
 position = Vector2(0, -2)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Health" parent="." instance=ExtResource("2_rvslj")]

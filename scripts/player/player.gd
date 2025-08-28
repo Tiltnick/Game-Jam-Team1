@@ -3,7 +3,7 @@ class_name Player extends CharacterBody2D
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var stateMachine:PlayerStateMachine = $StateMachine
 @export var moveSpeed:float = 200.0
-@export var max_health:float = 20.0
+@export var max_health:float = 19.0
 @export var health: float = 10.0
 @export var attackSpeed:float = 50.0
 @export var damage:float = 50.0
@@ -98,6 +98,11 @@ func apply_potion(potion: PotionPickup) -> void:
 			attackSpeed += potion.amount
 		#add attackCooldown later
 
+var bowNumber = 0
+
+func increment_ally():
+	bowNumber+=1
+	print_debug("Number of bows in inventory: " + str(bowNumber))
 func setAttackAnimation():
 	sprite.play("Attack")
 
