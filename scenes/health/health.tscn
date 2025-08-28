@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://jvus7ev4ut28"]
 
-[ext_resource type="Texture2D" uid="uid://cg66njmx1mcfe" path="res://assets/gui-health.png" id="1_emw4u"]
+[ext_resource type="Texture2D" uid="uid://nhm1jk85r1w8" path="res://assets/gui-health.png" id="1_emw4u"]
 [ext_resource type="Script" uid="uid://cj1rvnmwoq6mf" path="res://scripts/health/health.gd" id="1_stopl"]
 [ext_resource type="PackedScene" uid="uid://dagkcs0q5qm22" path="res://scenes/health/heart.tscn" id="2_stopl"]
 
