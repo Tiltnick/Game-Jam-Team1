@@ -69,3 +69,6 @@ func setDashAnimation():
 			sprite.play("DashSide")
 		Dir.UP:
 			sprite.play("DashUp")
+
+func setAttackAnimation():
+	sprite.play("Attack")

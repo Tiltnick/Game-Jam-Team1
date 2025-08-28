@@ -10,7 +10,6 @@ var left:bool = true
 var dashTimer:float  = 0.0
 
 func enter() -> void:
-	
 	player.setDashAnimation()
 	match player.isFacing:
 		Player.Dir.DOWN:
