@@ -103,14 +103,20 @@ var bowNumber = 0
 func increment_ally():
 	bowNumber+=1
 	print_debug("Number of bows in inventory: " + str(bowNumber))
+
 func setAttackAnimation():
 	sprite.play("Attack")
 
+func centerPosition() -> Vector2:
+	var center = global_position
+	center.y -= 29.0
+	return center
+
 func shoot(dir:Vector2):
 	var projectile = ice.instantiate()
+	
 	get_parent().add_child(projectile)
-	projectile.global_position = global_position
-	projectile.global_position.y -= 29.0
+	projectile.global_position = centerPosition()
 	projectile.direction = dir
 	projectile.speed = projectile_speed
 	projectile.rotation = dir.angle()

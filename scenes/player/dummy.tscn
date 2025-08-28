@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://chftrriahs0cf"]
+
+[ext_resource type="Texture2D" uid="uid://bnwpkpc2gq4jc" path="res://assets/Slime.png" id="1_2ckpl"]
+[ext_resource type="Script" uid="uid://bcgmdos3648vm" path="res://scripts/player/dummy.gd" id="1_ejrhf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejrhf"]
+size = Vector2(14, 12.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yv0t"]
+atlas = ExtResource("1_2ckpl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b3lcr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yv0t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Dummy" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_ejrhf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_ejrhf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -11)
+sprite_frames = SubResource("SpriteFrames_b3lcr")

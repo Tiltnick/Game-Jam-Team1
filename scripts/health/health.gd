@@ -6,7 +6,6 @@ var hearts : Array[ Heart ] = []
 func _ready():
 	for child in $Control/HFlowContainer.get_children():
 		if child is Heart:
-			print("new heart added")
 			hearts.append( child )
 			child.visible = false
 	pass

@@ -1,5 +1,5 @@
 class_name State_Attack extends State
-var screen_center = Vector2(1920/2, 1080/2)  # Bildschirmmitte
+var screen_center = Vector2(1920.0/2.0, 1080.0/2.0)  # Bildschirmmitte
 @onready var idle:State = $"../Idle"
 var attackTimer:float = 0.0
 
@@ -7,9 +7,10 @@ func enter() -> void:
 	player.setAttackAnimation()
 	attackTimer = 0.3
 	player.velocity = Vector2.ZERO
+	
 	var mousePos = get_viewport().get_mouse_position()
 	var mouseWorld = mousePos - screen_center 
-	var relative = mouseWorld - player.position
+	var relative = mouseWorld - player.centerPosition()
 	if relative.x >= 0:
 		player.sprite.flip_h = false
 	else:
@@ -24,11 +25,6 @@ func exit() -> void:
 	pass
 
 func process(_delta:float) -> State:
-	var mousePos = get_viewport().get_mouse_position()
-	var mouseWorld = mousePos - screen_center 
-	var relative = mouseWorld - player.position
-	
-	
 	attackTimer -= _delta
 	if(attackTimer <= 0.0):
 		return idle

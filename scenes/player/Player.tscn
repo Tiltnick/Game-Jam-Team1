@@ -337,6 +337,7 @@ position = Vector2(-5.96046e-08, -33)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_x2u8p")
 animation = &"Attack"
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v6fml")
