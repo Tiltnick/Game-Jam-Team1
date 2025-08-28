@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://lh1tqikvgfun"]
+
+[ext_resource type="Script" uid="uid://bojwri4jkwhgr" path="res://scripts/enemies/enemy_slime_spawner.gd" id="1_gatna"]
+
+[node name="EnemySlimeSpawner" type="Node2D"]
+script = ExtResource("1_gatna")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -510)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(900, -510)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+position = Vector2(-900, -510)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
