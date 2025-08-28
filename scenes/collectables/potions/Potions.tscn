@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2bhy0ungi1k8"]
 
-[ext_resource type="Script" uid="uid://bw0601espubye" path="res://scripts/collectables/potions/pickup.gd" id="1_cjtts"]
+[ext_resource type="Script" uid="uid://bw0601espubye" path="res://scripts/collectables/potions/potion.gd" id="1_cjtts"]
 [ext_resource type="Resource" uid="uid://ccy2nba33yei3" path="res://Resources/Items/Potions/dmgPotion.tres" id="2_03w1f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjtts"]

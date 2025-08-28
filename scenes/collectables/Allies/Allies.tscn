@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dffup1pi0n4m"]
+
+[ext_resource type="Script" uid="uid://bf5fdg0kjrf54" path="res://scripts/collectables/Allies/ally.gd" id="1_58wxo"]
+[ext_resource type="Resource" uid="uid://bpfdxlfw67xk7" path="res://Resources/Items/Allies/Bow.tres" id="2_00amp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58wxo"]
+size = Vector2(37, 128)
+
+[node name="Allies" type="Node2D"]
+
+[node name="Ally" type="Area2D" parent="."]
+script = ExtResource("1_58wxo")
+ally = ExtResource("2_00amp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ally"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ally"]
+shape = SubResource("RectangleShape2D_58wxo")

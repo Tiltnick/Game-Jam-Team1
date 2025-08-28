@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AllyPickup" load_steps=3 format=3 uid="uid://bpfdxlfw67xk7"]
+
+[ext_resource type="Script" uid="uid://5geu8475batk" path="res://scripts/collectables/Allies/AllyPickup.gd" id="1_lndph"]
+[ext_resource type="Texture2D" uid="uid://d2lud6igby5q6" path="res://assets/Bow_item.png" id="2_hjdxc"]
+
+[resource]
+script = ExtResource("1_lndph")
+name = "Bow"
+texture = ExtResource("2_hjdxc")
+metadata/_custom_type_script = "uid://5geu8475batk"

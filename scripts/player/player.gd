@@ -78,3 +78,10 @@ func apply_potion(potion: PotionPickup) -> void:
 		"AttackSpeed":
 			attackSpeed += potion.amount
 		#add attackCooldown later
+
+var bowNumber = 0
+
+func increment_ally():
+	bowNumber+=1
+	print_debug("Number of bows in inventory: " + str(bowNumber))
+	
