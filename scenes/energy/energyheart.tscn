@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://de8ifkbcoqhqr"]
+
+[ext_resource type="Texture2D" uid="uid://d2jbfdio6atip" path="res://assets/gui-energy.png" id="1_h1ksg"]
+[ext_resource type="Script" uid="uid://h3qv0yquryk7" path="res://scripts/energy/energyheart.gd" id="1_xkv5e"]
+
+[node name="EnergyHeart" type="Control"]
+custom_minimum_size = Vector2(9, 9)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 9.0
+offset_bottom = 9.0
+script = ExtResource("1_xkv5e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_h1ksg")
+centered = false
+hframes = 7
+vframes = 2
