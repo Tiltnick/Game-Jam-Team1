@@ -1,7 +1,7 @@
 class_name State_Idle extends State
 
 @onready var walk:State = $"../Walk"
-
+@onready var attack:State = $"../Attack"
 
 func enter() -> void:
 	player.setIdleAnimation()
@@ -20,4 +20,6 @@ func physics(_delta:float) -> State:
 	return null
 
 func handleInput(_event:InputEvent) -> State:
+	if (_event.is_action_pressed("interact") && player.attackCooldownTimer <= 0.0):
+		return attack
 	return null

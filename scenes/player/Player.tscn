@@ -1,12 +1,25 @@
-[gd_scene load_steps=40 format=3 uid="uid://d4bwkomgkcikx"]
+[gd_scene load_steps=44 format=3 uid="uid://d4bwkomgkcikx"]
 
 [ext_resource type="Script" uid="uid://cgua41j78jkpc" path="res://scripts/player/player.gd" id="1_p0vlq"]
-[ext_resource type="Texture2D" uid="uid://dnx6xoy7lpg3b" path="res://assets/PlayerSprite02.png" id="2_npwbq"]
-[ext_resource type="Texture2D" uid="uid://bxtrvef63hctj" path="res://assets/ExamplePlayerSprite.png" id="2_v6fml"]
-[ext_resource type="Script" path="res://scripts/player/player_state_machine.gd" id="3_4kuee"]
-[ext_resource type="Script" path="res://scripts/player/state_idle.gd" id="4_524rm"]
-[ext_resource type="Script" path="res://scripts/player/state_walk.gd" id="5_tpg5x"]
-[ext_resource type="Script" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
+[ext_resource type="Texture2D" uid="uid://dsc6002rdt7av" path="res://assets/PlayerSprite02.png" id="2_npwbq"]
+[ext_resource type="Texture2D" uid="uid://b6q6pbf2o42ed" path="res://assets/ExamplePlayerSprite.png" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://coa0ecucrq4lj" path="res://scripts/player/player_state_machine.gd" id="3_4kuee"]
+[ext_resource type="Script" uid="uid://x37icxsoa3jk" path="res://scripts/player/state_idle.gd" id="4_524rm"]
+[ext_resource type="Script" uid="uid://cnw7oue47b763" path="res://scripts/player/state_walk.gd" id="5_tpg5x"]
+[ext_resource type="Script" uid="uid://b8ik8d7s8evxs" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
+[ext_resource type="Script" uid="uid://bl2uy2ax0ogxn" path="res://scripts/player/state_attack.gd" id="8_v42im"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qjgm"]
+atlas = ExtResource("2_npwbq")
+region = Rect2(704, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ejd4k"]
+atlas = ExtResource("2_npwbq")
+region = Rect2(768, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xrq6"]
+atlas = ExtResource("2_npwbq")
+region = Rect2(832, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npwbq"]
 atlas = ExtResource("2_npwbq")
@@ -130,6 +143,26 @@ region = Rect2(520, 0, 40, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x2u8p"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qjgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejd4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xrq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ejd4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qjgm")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_npwbq")
@@ -303,7 +336,7 @@ script = ExtResource("1_p0vlq")
 position = Vector2(-5.96046e-08, -33)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_x2u8p")
-animation = &"DashSide"
+animation = &"Attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v6fml")
@@ -322,5 +355,6 @@ script = ExtResource("5_tpg5x")
 script = ExtResource("6_c3xxp")
 
 [node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource("8_v42im")
 
 [node name="Hurt" type="Node" parent="StateMachine"]

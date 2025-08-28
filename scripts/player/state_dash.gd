@@ -22,6 +22,7 @@ func enter() -> void:
 		Player.Dir.UP:
 			player.velocity = Vector2.UP * dashSpeed
 	dashTimer = dashDuration
+	player.resetDashTimer()
 	pass
 
 func exit() -> void:
