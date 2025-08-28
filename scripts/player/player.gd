@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 @onready var healthbar = get_parent().get_node("Health")
 @export var moveSpeed:float = 150.0
 @export var max_health:float = 20.0
-@export var health: float = 20.0
+@export var health: float = 10.0
 @export var attackSpeed:float = 50.0
 @export var damage:float = 50.0
 @export var max_energy:float = 100.0
