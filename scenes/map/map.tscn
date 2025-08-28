@@ -1251,9 +1251,11 @@ slime_scene = ExtResource("7_04w0f")
 target_path = NodePath("../Chest/ChestTarget")
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("10_f17u5")
 
 [node name="ChestHPLabel" type="Label" parent="UI"]
+visible = false
 offset_left = -20.0
 offset_top = -75.0
 offset_right = 20.0
