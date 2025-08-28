@@ -112,6 +112,14 @@ region = Rect2(3072, 0, 512, 512)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"hidden",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rc8hb")
 }],
 "loop": false,
@@ -128,13 +136,13 @@ script = ExtResource("1_7xcjf")
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_qctnd")
-animation = &"spawn"
+animation = &"hit"
 metadata/_edit_lock_ = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_2lb6o")
-animation = &"static"
+animation = &"hidden"
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -142,3 +150,4 @@ position = Vector2(-1.75, 0.5)
 shape = SubResource("RectangleShape2D_mayhi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="Animation" to="." method="_on_animation_animation_finished"]
