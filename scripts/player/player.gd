@@ -88,6 +88,7 @@ func shoot(dir:Vector2):
 	var projectile = ice.instantiate()
 	get_parent().add_child(projectile)
 	projectile.global_position = global_position
+	projectile.global_position.y -= 29.0
 	projectile.direction = dir
 	projectile.speed = projectile_speed
 	projectile.rotation = dir.angle()
