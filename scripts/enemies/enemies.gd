@@ -1,11 +1,16 @@
-extends Node2D
+extends CharacterBody2D
 
+const speed = 200
+@export var chest: Node2D
+@onready var navAgent := $NavigationAgent2D as NavigationAgent2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _physics_process(delta: float) -> void:
+	var dir = (chest.global_position - global_position).normalized()
+	velocity = dir * speed
+	move_and_slide()
+	
+#func makepath() -> void:
+	#navAgent.target_position = chest.global_position
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+#func _on_timer_timeout():
+	#makepath()

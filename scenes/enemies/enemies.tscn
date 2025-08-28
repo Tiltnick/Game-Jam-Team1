@@ -1,27 +1,31 @@
-[gd_scene load_steps=7 format=3 uid="uid://cipxlme86wwt4"]
+[gd_scene load_steps=8 format=3 uid="uid://cipxlme86wwt4"]
 
 [ext_resource type="Script" uid="uid://c6imjdmani58t" path="res://scripts/enemies/enemies.gd" id="1_31ocp"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_31ocp"]
-region = Rect2(0, 0, 64, 64)
+[ext_resource type="Texture2D" uid="uid://bbkhiyl2xq2cb" path="res://assets/sprites/enemies/Slime.png" id="2_31ocp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayqi8"]
-region = Rect2(64, 0, 64, 64)
+atlas = ExtResource("2_31ocp")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ctrou"]
+atlas = ExtResource("2_31ocp")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygmqc"]
+atlas = ExtResource("2_31ocp")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygmqc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_31ocp")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_ayqi8")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ctrou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygmqc")
 }],
 "loop": true,
 "name": &"idle",
@@ -31,7 +35,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_pgpww"]
 radius = 12.0
 
-[node name="Slime" type="Node2D"]
+[node name="Slime" type="CharacterBody2D"]
 script = ExtResource("1_31ocp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -39,10 +43,14 @@ position = Vector2(0, -24)
 sprite_frames = SubResource("SpriteFrames_ygmqc")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.817783
+frame_progress = 0.955887
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D"]
-position = Vector2(0, 12)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
 shape = SubResource("CircleShape2D_pgpww")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
