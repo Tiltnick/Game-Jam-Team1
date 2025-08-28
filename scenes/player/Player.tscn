@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://x37icxsoa3jk" path="res://scripts/player/state_idle.gd" id="4_524rm"]
 [ext_resource type="Script" uid="uid://cnw7oue47b763" path="res://scripts/player/state_walk.gd" id="5_tpg5x"]
 [ext_resource type="Script" uid="uid://b8ik8d7s8evxs" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
-[ext_resource type="Script" uid="uid://bl2uy2ax0ogxn" path="res://scripts/player/state_attack.gd" id="8_v42im"]
+[ext_resource type="Script" path="res://scripts/player/state_attack.gd" id="8_v42im"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qjgm"]
 atlas = ExtResource("2_npwbq")

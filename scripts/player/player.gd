@@ -10,7 +10,7 @@ class_name Player extends CharacterBody2D
 @export var max_energy:float = 100.0
 @export var energy:float = 100.0
 @export var attackCooldown: float = 1.0
-
+@onready var healthbar = get_parent().get_node("Health")
 @export var dashCooldown: float = 1.0
 
 @export var projectile_speed:float = 700.0
@@ -28,6 +28,7 @@ var isFacing = Dir.DOWN
 
 func _ready():
 	stateMachine.initialize(self)
+	healthbar.update_hp(health, max_health)
 
 func _process(_delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -93,4 +94,12 @@ func shoot(dir:Vector2):
 	projectile.speed = projectile_speed
 	projectile.rotation = dir.angle()
 	resetAttackTimer()
+	
+func take_damage(amount: int) -> void:
+	health = max(health - amount, 0)
+	healthbar.update_hp(health, max_health)
+
+func heal(amount: int) -> void:
+	health = min(health + amount, max_health)
+	healthbar.update_hp(health, max_health)
 	
