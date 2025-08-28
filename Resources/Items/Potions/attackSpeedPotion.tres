@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PotionPickup" load_steps=3 format=3 uid="uid://n6h8f35s86yn"]
+
+[ext_resource type="Script" uid="uid://dsi6huvk01akg" path="res://scripts/collectables/potions/PotionPickup.gd" id="1_5exsu"]
+[ext_resource type="Texture2D" uid="uid://iewxgbuy2sjl" path="res://assets/collectables/potions/attackSpeedPotion-Yellow.png" id="2_ld6fb"]
+
+[resource]
+script = ExtResource("1_5exsu")
+type = "\"Attack_speed\""
+amount = 10.0
+texture = ExtResource("2_ld6fb")
+metadata/_custom_type_script = "uid://dsi6huvk01akg"
