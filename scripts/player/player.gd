@@ -3,7 +3,15 @@ class_name Player extends CharacterBody2D
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var stateMachine:PlayerStateMachine = $StateMachine
 @export var moveSpeed:float = 150.0
-@export var health:float = 100.0
+@export var max_health:float = 100.0
+@export var health: float = 100.0
+@export var attackSpeed:float = 50.0
+@export var damage:float = 50.0
+@export var max_energy:float = 100.0
+@export var energy:float = 100.0
+@export var attackCooldown: float = 0.5
+
+
 var direction: Vector2 = Vector2.ZERO
 enum Dir {DOWN, SIDE, UP}
 var isFacing = Dir.DOWN
