@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://tf8gb4k3i4v4"]
+
+[ext_resource type="Texture2D" uid="uid://u73jtxm044er" path="res://assets/health/gui-health.png" id="1_kmo0v"]
+
+[node name="Health" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(-917, -503)
+texture = ExtResource("1_kmo0v")
+region_enabled = true
+region_rect = Rect2(29, 0, 34, 8)
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -11.0
+offset_right = 49.0
+offset_bottom = 29.0
+
+[node name="Control" type="Control" parent="Control/HFlowContainer"]
+layout_mode = 2
