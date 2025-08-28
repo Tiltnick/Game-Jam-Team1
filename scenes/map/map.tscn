@@ -1219,6 +1219,8 @@ scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAD///7/AAABAAEAAAD/////AAABAAIAAAD//wAAAAABAAMAAAAAAP7/AAACAAEAAAAAAP//AAACAAIAAAAAAAAAAAACAAMAAAA=")
 tile_set = SubResource("TileSet_fcby6")
 
+[node name="Health" parent="." instance=ExtResource("6_sqgf4")]
+
 [node name="Player" parent="." instance=ExtResource("6_04w0f")]
 position = Vector2(-51.9876, -43.788)
 
@@ -1229,5 +1231,3 @@ player = NodePath("../Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_04w0f")
-
-[node name="Health" parent="." instance=ExtResource("6_sqgf4")]
