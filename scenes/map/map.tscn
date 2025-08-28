@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://chi3yp36d6iuj"]
+[gd_scene load_steps=16 format=4 uid="uid://chi3yp36d6iuj"]
 
 [ext_resource type="Texture2D" uid="uid://btblf13vw5m5p" path="res://assets/dungeon.png" id="2_tqkkf"]
 [ext_resource type="Texture2D" uid="uid://plekkyy5ap20" path="res://assets/treasure-chest.png" id="3_a2pkv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dwdy5huex7j36" path="res://assets/treasure-chest-ghost.png" id="5_jcaow"]
 [ext_resource type="PackedScene" uid="uid://d4bwkomgkcikx" path="res://scenes/player/Player.tscn" id="6_04w0f"]
 [ext_resource type="PackedScene" uid="uid://cipxlme86wwt4" path="res://scenes/enemies/enemies.tscn" id="6_jcaow"]
+[ext_resource type="PackedScene" uid="uid://jvus7ev4ut28" path="res://scenes/health/health.tscn" id="6_sqgf4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fcby6"]
 texture = ExtResource("2_tqkkf")
@@ -1143,6 +1144,8 @@ tile_set = SubResource("TileSet_fcby6")
 [node name="Slime" parent="." node_paths=PackedStringArray("chest") instance=ExtResource("6_jcaow")]
 position = Vector2(888, -56)
 chest = NodePath("../Player")
+
+[node name="Health" parent="." instance=ExtResource("6_sqgf4")]
 
 [node name="Player" parent="." instance=ExtResource("6_04w0f")]
 position = Vector2(-51.9876, -43.788)
