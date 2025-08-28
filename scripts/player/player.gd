@@ -2,9 +2,10 @@ class_name Player extends CharacterBody2D
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var stateMachine:PlayerStateMachine = $StateMachine
+@onready var healthbar = get_parent().get_node("Health")
 @export var moveSpeed:float = 150.0
-@export var max_health:float = 100.0
-@export var health: float = 100.0
+@export var max_health:float = 20.0
+@export var health: float = 20.0
 @export var attackSpeed:float = 50.0
 @export var damage:float = 50.0
 @export var max_energy:float = 100.0
@@ -19,6 +20,7 @@ var isFacing = Dir.DOWN
 
 func _ready():
 	stateMachine.initialize(self)
+	healthbar.update_hp(health, max_health)
 
 func _process(delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -62,3 +64,11 @@ func setDashAnimation():
 			sprite.play("DashSide")
 		Dir.UP:
 			sprite.play("DashUp")
+
+func take_damage(amount: int) -> void:
+	health = max(health - amount, 0)
+	healthbar.update_hp(health, max_health)
+
+func heal(amount: int) -> void:
+	health = min(health + amount, max_health)
+	healthbar.update_hp(health, max_health)
