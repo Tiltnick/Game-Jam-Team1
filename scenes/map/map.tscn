@@ -622,6 +622,7 @@ texture = ExtResource("3_a2pkv")
 7:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ph54e"]
+navigation_layer_0/layers = 2
 sources/0 = SubResource("TileSetAtlasSource_04w0f")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sqgf4"]
@@ -1222,6 +1223,7 @@ position = Vector2(-51.9876, -43.788)
 
 [node name="SlimePath" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_04w0f")]
 position = Vector2(874, 123)
+motion_mode = 1
 player = NodePath("../Player")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
