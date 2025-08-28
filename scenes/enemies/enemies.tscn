@@ -1,18 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://cipxlme86wwt4"]
+[gd_scene load_steps=7 format=3 uid="uid://cipxlme86wwt4"]
 
 [ext_resource type="Script" uid="uid://c6imjdmani58t" path="res://scripts/enemies/enemies.gd" id="1_31ocp"]
-[ext_resource type="Texture2D" uid="uid://c4os74x0usrbm" path="res://assets/sprite/enemies/Slime.png" id="1_pgpww"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_31ocp"]
-atlas = ExtResource("1_pgpww")
 region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayqi8"]
-atlas = ExtResource("1_pgpww")
 region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ctrou"]
-atlas = ExtResource("1_pgpww")
 region = Rect2(128, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ygmqc"]
