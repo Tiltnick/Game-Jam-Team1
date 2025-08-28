@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfbnao4eaxfnf"]
+
+[ext_resource type="Script" uid="uid://dsi6huvk01akg" path="res://scripts/collectables/potions/PotionPickup.gd" id="1_2qcnx"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3f80d"]
+load_path = "res://.godot/imported/PotionsPack1.png-73fd7791d49c2765fadde3747e61f9b2.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfgwl"]
+size = Vector2(22, 29)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PotionPickup" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("1_2qcnx")
+
+[node name="Sprite2D" type="Sprite2D" parent="PotionPickup"]
+texture = SubResource("CompressedTexture2D_3f80d")
+region_enabled = true
+region_rect = Rect2(228.026, 30.5406, 23.5787, 32.819)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PotionPickup"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_bfgwl")
