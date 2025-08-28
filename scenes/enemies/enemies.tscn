@@ -51,6 +51,10 @@ shape = SubResource("CircleShape2D_pgpww")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(1, 0.04, 0.04, 1)
+debug_path_custom_point_size = 10.0
+debug_path_custom_line_width = 10.0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
