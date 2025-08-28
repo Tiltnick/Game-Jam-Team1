@@ -13,7 +13,7 @@ class_name Player extends CharacterBody2D
 
 @export var dashCooldown: float = 1.0
 
-var dashTimer: float = 0.0
+var dashCooldownTimer: float = 0.0
 
 var direction: Vector2 = Vector2.ZERO
 enum Dir {DOWN, SIDE, UP}
@@ -27,10 +27,14 @@ func _process(_delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
 	
+	if(dashCooldownTimer > 0.0):
+		dashCooldownTimer -= _delta
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
+func resetDashTimer():
+	dashCooldownTimer = dashCooldown
 
 func setMoveAnimation():
 	if(direction.x):

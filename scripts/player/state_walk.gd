@@ -25,6 +25,6 @@ func physics(_delta:float) -> State:
 	return null
 
 func handleInput(_event:InputEvent) -> State:
-	if(_event.is_action_pressed("dash")):
+	if(_event.is_action_pressed("dash") && player.dashCooldownTimer <= 0.0):
 		return dash
 	return null

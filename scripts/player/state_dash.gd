@@ -10,6 +10,7 @@ var left:bool = true
 var dashTimer:float  = 0.0
 
 func enter() -> void:
+	
 	player.setDashAnimation()
 	match player.isFacing:
 		Player.Dir.DOWN:
@@ -22,6 +23,7 @@ func enter() -> void:
 		Player.Dir.UP:
 			player.velocity = Vector2.UP * dashSpeed
 	dashTimer = dashDuration
+	player.resetDashTimer()
 	pass
 
 func exit() -> void:
