@@ -64,8 +64,6 @@ func setDashAnimation():
 			sprite.play("DashUp")
 
 func apply_potion(potion: PotionPickup) -> void:
-	print_debug(potion.type)
-	print_debug("Entered apply potion function")
 	match potion.type:
 		"Heal":
 			health = clamp(health+potion.amount, 0.0, max_health)

@@ -13,7 +13,6 @@ func _ready() -> void:
 
 func _on_body_entered ( body ):
 	if body is Player :
-		print_debug("Entered body")
 		body.apply_potion(potion)
 		collected.emit(potion)
 		queue_free()
