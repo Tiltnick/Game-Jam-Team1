@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_gkv0e")
-type = "\"Damage\""
+type = "Damage"
 amount = 2.0
 texture = ExtResource("2_iaqsl")
 metadata/_custom_type_script = "uid://dsi6huvk01akg"

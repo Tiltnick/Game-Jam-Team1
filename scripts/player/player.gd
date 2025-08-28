@@ -62,3 +62,21 @@ func setDashAnimation():
 			sprite.play("DashSide")
 		Dir.UP:
 			sprite.play("DashUp")
+
+func apply_potion(potion: PotionPickup) -> void:
+	print_debug(potion.type)
+	print_debug("Entered apply potion function")
+	match potion.type:
+		"Heal":
+			health = clamp(health+potion.amount, 0.0, max_health)
+			print_debug("New Health: " + str(health))
+		"Energy":
+			energy = clamp(energy+potion.amount, 0.0, max_energy)
+		"Damage":
+			damage += potion.amount
+			print_debug("New damage:" + str(damage))
+		"Speed":
+			moveSpeed += potion.amount
+		"AttackSpeed":
+			attackSpeed += potion.amount
+		#add attackCooldown later

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_xp6r8")
-type = "\"Speed\""
+type = "Speed"
 amount = 50.0
 texture = ExtResource("2_e2ep2")
 metadata/_custom_type_script = "uid://dsi6huvk01akg"
