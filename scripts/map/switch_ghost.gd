@@ -6,19 +6,15 @@ extends Node2D
 @onready var chest_ghost = $ChestGhost
 
 var is_ghost: bool = false
-var q_pressed_last_frame: bool = false
 
-func _process(_delta: float) -> void:
-	var q_pressed = Input.is_key_pressed(KEY_Q)
-
-	# nur einmal umschalten, wenn Q gerade gedrückt wurde
-	if q_pressed and not q_pressed_last_frame:
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("switch_form"):
 		is_ghost = !is_ghost
-		print("Switching form! is_ghost =", is_ghost)
 
+		# normale Welt 
 		rock.visible = !is_ghost
 		chest.visible = !is_ghost
+
+		# geisterwelt 
 		rock_ghost.visible = is_ghost
 		chest_ghost.visible = is_ghost
-
-	q_pressed_last_frame = q_pressed

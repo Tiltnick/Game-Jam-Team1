@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=4 uid="uid://chi3yp36d6iuj"]
 
 [ext_resource type="Script" uid="uid://bmb47pp8en7is" path="res://scripts/map/switch_ghost.gd" id="1_fcby6"]
-[ext_resource type="Texture2D" uid="uid://cnomq6pweuict" path="res://assets/map/dungeon.png" id="1_sxf4j"]
-[ext_resource type="Texture2D" uid="uid://bipoe2wntmapi" path="res://assets/map/dungeon-ghost.png" id="1_tqkkf"]
-[ext_resource type="Texture2D" uid="uid://cm6bhmla16jau" path="res://assets/map/treasure-chest-ghost.png" id="2_a2pkv"]
-[ext_resource type="Texture2D" uid="uid://cekm5oplx40er" path="res://assets/map/treasure-chest.png" id="2_tqkkf"]
+[ext_resource type="Texture2D" uid="uid://2emjo2rg757a" path="res://assets/map/dungeon.png" id="2_tqkkf"]
+[ext_resource type="Texture2D" uid="uid://catk83s4byow0" path="res://assets/map/treasure-chest.png" id="3_a2pkv"]
+[ext_resource type="Texture2D" uid="uid://cw074em1thej3" path="res://assets/map/dungeon-ghost.png" id="4_fcby6"]
+[ext_resource type="Texture2D" uid="uid://jeaytkqlyto8" path="res://assets/map/treasure-chest-ghost.png" id="5_jcaow"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tqkkf"]
-texture = ExtResource("1_sxf4j")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fcby6"]
+texture = ExtResource("2_tqkkf")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -522,10 +522,10 @@ texture = ExtResource("1_sxf4j")
 31:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_a2pkv"]
-sources/0 = SubResource("TileSetAtlasSource_tqkkf")
+sources/0 = SubResource("TileSetAtlasSource_fcby6")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a2pkv"]
-texture = ExtResource("2_tqkkf")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04w0f"]
+texture = ExtResource("3_a2pkv")
 5:0/0 = 0
 6:0/0 = 0
 1:1/0 = 0
@@ -550,10 +550,10 @@ texture = ExtResource("2_tqkkf")
 7:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ph54e"]
-sources/0 = SubResource("TileSetAtlasSource_a2pkv")
+sources/0 = SubResource("TileSetAtlasSource_04w0f")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jcaow"]
-texture = ExtResource("1_tqkkf")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sqgf4"]
+texture = ExtResource("4_fcby6")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1068,10 +1068,10 @@ texture = ExtResource("1_tqkkf")
 31:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_04w0f"]
-sources/0 = SubResource("TileSetAtlasSource_jcaow")
+sources/0 = SubResource("TileSetAtlasSource_sqgf4")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ph54e"]
-texture = ExtResource("2_a2pkv")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvrx0"]
+texture = ExtResource("5_jcaow")
 5:0/0 = 0
 6:0/0 = 0
 1:1/0 = 0
@@ -1096,7 +1096,7 @@ texture = ExtResource("2_a2pkv")
 7:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fcby6"]
-sources/0 = SubResource("TileSetAtlasSource_ph54e")
+sources/0 = SubResource("TileSetAtlasSource_vvrx0")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("1_fcby6")
