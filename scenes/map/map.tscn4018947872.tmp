@@ -1228,6 +1228,8 @@ position = Vector2(-51.9876, -43.788)
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_04w0f")
 
+[node name="slime" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_04w0f")]
+position = Vector2(681, -28)
+player = NodePath("../Chest")
+
 [node name="EnemySlimeSpawner" parent="." instance=ExtResource("8_sqgf4")]
-slime_scene = ExtResource("7_04w0f")
-target_path = NodePath("../Chest")
