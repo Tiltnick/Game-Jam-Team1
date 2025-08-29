@@ -11,8 +11,10 @@ const final_damage:float = 1.0
 const final_max_energy:float = 5.0
 const final_energy:float = 3.0
 const final_attackCooldown: float = 1.0
+const final_attackCooldown_ghost:float = 0.2
 const final_dashCooldown: float = 1.0
 const final_projectile_speed:float = 700.0
+const final_ghostMultiplier:float = 1.2
 
 @export var moveSpeed:float = 200.0
 @export var max_health:float = 20.0
@@ -42,7 +44,7 @@ var isFacing = Dir.DOWN
 
 var energy_active: bool = false
 var energy_timer: float = 0.0
-@export var energy_duration: float = 5.0
+@export var energy_duration: float = 4.0
 
 
 
@@ -78,6 +80,10 @@ func _process(_delta):
 			energy_active = false
 			map.set_ghost_mode(false)
 			attackCooldown = final_attackCooldown
+			damage = final_damage
+			projectile_speed = final_projectile_speed
+			moveSpeed = final_moveSpeed
+			dashCooldown = final_dashCooldown
 			$AnimatedSprite2D.material.set("shader_parameter/invert_colors", false)
 
 			print("Energy wieder aus")
@@ -186,7 +192,11 @@ func activate_energy():
 		energy_active = true
 		energy_timer = energy_duration
 		map.set_ghost_mode(true) 
-		attackCooldown = 0.2
+		attackCooldown = final_attackCooldown_ghost
+		damage *= final_ghostMultiplier
+		projectile_speed *= final_ghostMultiplier
+		moveSpeed *= final_ghostMultiplier
+		dashCooldown /= final_ghostMultiplier
 		$AnimatedSprite2D.material.set("shader_parameter/invert_colors", true)
 
 		print("Energy aktiviert für ", energy_duration, " Sekunden")
