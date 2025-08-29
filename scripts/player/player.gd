@@ -58,7 +58,6 @@ func _ready():
 	max_energy = final_max_energy
 	energy = final_energy
 	attackCooldown = final_attackCooldown
-
 	dashCooldown = final_dashCooldown
 	projectile_speed = final_projectile_speed
 	stateMachine.initialize(self)
