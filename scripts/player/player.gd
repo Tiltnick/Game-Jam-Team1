@@ -147,6 +147,8 @@ func shoot(dir:Vector2):
 func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
 	healthbar.update_hp(health, max_health)
+	if health <= 0:
+		die()
 
 func heal(amount: int) -> void:
 	health = min(health + amount, max_health)
@@ -154,6 +156,8 @@ func heal(amount: int) -> void:
 	
 
 func activate_energy():
+	var game_over_ui = get_tree().current_scene.get_node("GameOver")
+	game_over_ui.game_over()
 	if energy > 0 and not energy_active:
 		energy -= 1
 		energybar.update_energy(energy, max_energy)
@@ -161,3 +165,8 @@ func activate_energy():
 		energy_timer = energy_duration
 		map.set_ghost_mode(true) 
 		print("Energy aktiviert für ", energy_duration, " Sekunden")
+		
+		
+func die() -> void:
+	var game_over_ui = get_tree().current_scene.get_node("GameOverUI")
+	game_over_ui.game_over()
