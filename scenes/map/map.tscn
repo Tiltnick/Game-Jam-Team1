@@ -1,5 +1,6 @@
-[gd_scene load_steps=23 format=4 uid="uid://chi3yp36d6iuj"]
+[gd_scene load_steps=26 format=4 uid="uid://chi3yp36d6iuj"]
 
+[ext_resource type="Script" uid="uid://cj50yv8v7rg80" path="res://scripts/dimension/GhostWorld.gd" id="1_vvrx0"]
 [ext_resource type="Texture2D" uid="uid://btblf13vw5m5p" path="res://assets/dungeon.png" id="2_tqkkf"]
 [ext_resource type="Texture2D" uid="uid://plekkyy5ap20" path="res://assets/treasure-chest.png" id="3_a2pkv"]
 [ext_resource type="Script" uid="uid://dm4mdhjqlu178" path="res://scripts/BaseChest/base_health.gd" id="3_vvrx0"]
@@ -8,9 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://dwdy5huex7j36" path="res://assets/treasure-chest-ghost.png" id="5_jcaow"]
 [ext_resource type="PackedScene" uid="uid://d4bwkomgkcikx" path="res://scenes/player/Player.tscn" id="6_04w0f"]
 [ext_resource type="PackedScene" uid="uid://jvus7ev4ut28" path="res://scenes/health/health.tscn" id="6_sqgf4"]
-[ext_resource type="PackedScene" uid="uid://bobx66c843jrx" path="res://scenes/enemies/slime.tscn" id="7_04w0f"]
-[ext_resource type="PackedScene" uid="uid://cyjo73r37gque" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
+[ext_resource type="PackedScene" uid="uid://vsuurcyxjdko" path="res://scenes/energy/energy.tscn" id="6_vvrx0"]
+[ext_resource type="PackedScene" uid="uid://cipxlme86wwt4" path="res://scenes/enemies/slime.tscn" id="7_04w0f"]
+[ext_resource type="PackedScene" uid="uid://lh1tqikvgfun" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
 [ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
+[ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="13_mgs8m"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sqgf4"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1186,6 +1189,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-968, -552, 968, -552, 
 agent_radius = 20.0
 
 [node name="Map" type="Node2D"]
+script = ExtResource("1_vvrx0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -1238,10 +1242,9 @@ scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAD///7/AAABAAEAAAD/////AAABAAIAAAD//wAAAAABAAMAAAAAAP7/AAACAAEAAAAAAP//AAACAAIAAAAAAAAAAAACAAMAAAA=")
 tile_set = SubResource("TileSet_fcby6")
 
-[node name="Health" parent="." instance=ExtResource("6_sqgf4")]
+[node name="Energy" parent="." instance=ExtResource("6_vvrx0")]
 
-[node name="Player" parent="." instance=ExtResource("6_04w0f")]
-position = Vector2(-51.9876, -43.788)
+[node name="Health" parent="." instance=ExtResource("6_sqgf4")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_04w0f")
@@ -1249,6 +1252,13 @@ navigation_polygon = SubResource("NavigationPolygon_04w0f")
 [node name="EnemySlimeSpawner" parent="." instance=ExtResource("8_sqgf4")]
 slime_scene = ExtResource("7_04w0f")
 target_path = NodePath("../Chest/ChestTarget")
+
+[node name="Player" parent="." instance=ExtResource("6_04w0f")]
+z_index = 100
+position = Vector2(-51.9876, -43.788)
+
+[node name="Potions" parent="." instance=ExtResource("13_mgs8m")]
+position = Vector2(200, 200)
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
