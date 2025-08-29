@@ -6,13 +6,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58wxo"]
 size = Vector2(37, 128)
 
-[node name="Allies" type="Node2D"]
-
-[node name="Ally" type="Area2D" parent="."]
+[node name="Ally" type="Area2D"]
 script = ExtResource("1_58wxo")
 ally = ExtResource("2_00amp")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ally"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ally"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_58wxo")
+
+[node name="Allies" type="Node2D" parent="."]
