@@ -80,10 +80,10 @@ func _process(_delta):
 			energy_active = false
 			map.set_ghost_mode(false)
 			attackCooldown = final_attackCooldown
-			damage = final_damage
-			projectile_speed = final_projectile_speed
-			moveSpeed = final_moveSpeed
-			dashCooldown = final_dashCooldown
+			damage /= final_ghostMultiplier
+			projectile_speed /= final_ghostMultiplier
+			moveSpeed /= final_ghostMultiplier
+			dashCooldown *= final_ghostMultiplier
 			$AnimatedSprite2D.material.set("shader_parameter/invert_colors", false)
 
 			print("Energy wieder aus")
