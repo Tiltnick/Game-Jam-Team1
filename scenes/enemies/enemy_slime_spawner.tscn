@@ -73,6 +73,7 @@ func _on_slime_timer() -> void:
 		slime.set_target(target)
 
 func _on_base_died() -> void:
+	print(\"base died\")
 	if _boss_spawned:
 		return
 	_boss_spawned = true
@@ -84,6 +85,7 @@ func _on_base_died() -> void:
 
 	# Boss spawnen
 	if boss_scene:
+		print(\"boss spawned\")
 		await get_tree().create_timer(boss_spawn_delay).timeout
 		var boss := boss_scene.instantiate()
 		if is_instance_valid(target):
