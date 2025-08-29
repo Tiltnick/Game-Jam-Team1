@@ -12,14 +12,14 @@ extends Area2D
 
 var _vel: Vector2 = Vector2.ZERO
 
-@onready var sprite_node: Node = get_node_or_null("Sprite")         # AnimatedSprite2D ODER Sprite2D
+@onready var sprite_node: Node = get_node_or_null("Sprite")  
 @onready var lifetime_timer: Timer = $Lifetime
 @onready var colshape: CollisionShape2D = $CollisionShape2D
 
 func launch(start_pos: Vector2, dir: Vector2, dmg: int = -1) -> void:
 	var d := dir.normalized()
 
-	# kleiner Spawn-Offset, damit der Collider nicht sofort trifft
+	#Spawn-Offset
 	var gap := 16.0
 	if colshape and colshape.shape is RectangleShape2D:
 		var r := colshape.shape as RectangleShape2D
@@ -30,8 +30,6 @@ func launch(start_pos: Vector2, dir: Vector2, dmg: int = -1) -> void:
 	_vel = d * speed
 	if dmg >= 0:
 		damage = dmg
-
-	# 1 Frame „disarmed“
 	set_deferred("monitoring", false)
 	await get_tree().process_frame
 	monitoring = true
@@ -40,7 +38,7 @@ func _ready() -> void:
 	z_as_relative = false
 	z_index = 200
 
-	# Sprite/Animation konfigurieren
+	
 	if sprite_node:
 		if sprite_node is AnimatedSprite2D:
 			var anim := sprite_node as AnimatedSprite2D

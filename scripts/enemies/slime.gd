@@ -27,7 +27,7 @@ func _ready() -> void:
 	add_to_group("enemy")
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 
-	# Agent-Setup (kannst du anpassen)
+	# Agent-Setup
 	nav_agent.radius = 12.0
 	nav_agent.path_desired_distance = 10.0
 	nav_agent.target_desired_distance = 14.0
@@ -36,7 +36,7 @@ func _ready() -> void:
 	nav_agent.max_speed = speed
 	nav_agent.velocity_computed.connect(_on_nav_velocity_computed)
 
-	# Timer sicher verbinden
+	# Timer
 	if timer:
 		timer.wait_time = retarget_interval
 		if not timer.timeout.is_connected(_on_timer_timeout):
@@ -58,7 +58,6 @@ func _physics_process(_dt: float) -> void:
 	else:
 		_try_attack()
 
-	# extra Sicherheits-Trigger über Distanz
 	if is_instance_valid(player):
 		var d := global_position.distance_to(player.global_position)
 		if d <= attack_distance:

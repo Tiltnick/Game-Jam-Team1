@@ -3,16 +3,15 @@
 [ext_resource type="PackedScene" uid="uid://cipxlme86wwt4" path="res://scenes/enemies/slime.tscn" id="1_gatna"]
 
 [sub_resource type="GDScript" id="GDScript_b2lj1"]
-script/source = "# res://scripts/enemies/enemy_slime_spawner.gd
-extends Node2D
+script/source = "extends Node2D
 
 # --- Slime-Phase (vor Boss) ---
 @export var slime_scene: PackedScene
 @export var slime_spawn_interval: float = 0.5
 
 # --- Referenzen ---
-@export var target_path: NodePath          # z.B. Chest/ChestTarget (hat take_damage & \"died\")
-@export var player_path: NodePath          # optional; sonst per Gruppe \"player\"
+@export var target_path: NodePath          
+@export var player_path: NodePath         
 
 # --- Boss-Phase ---
 @export var boss_scene: PackedScene
@@ -20,7 +19,7 @@ extends Node2D
 @export var boss_spawn_offset: Vector2 = Vector2.ZERO
 
 # --- Hände/Beams in Boss-Phase ---
-@export var hand_scene: PackedScene        # z.B. res://scenes/enemies/hand_bullet.tscn
+@export var hand_scene: PackedScene  
 @export var hand_fire_interval: float = 1.0
 
 @onready var slime_timer: Timer = $Timer
@@ -70,8 +69,6 @@ func _on_slime_timer() -> void:
 	slime.global_position = spawn.global_position
 	get_tree().current_scene.add_child(slime)
 
-	# === WICHTIG: Slime so lassen wie DEIN Skript es erwartet ===
-	# Dein slime.gd hat set_target(Node2D) -> das nutzen wir:
 	if slime.has_method(\"set_target\") and target:
 		slime.set_target(target)
 
@@ -80,12 +77,12 @@ func _on_base_died() -> void:
 		return
 	_boss_spawned = true
 
-	# Slimes stoppen & optional aufräumen
+	# Slimes stoppen
 	slime_timer.stop()
 	for e in get_tree().get_nodes_in_group(\"enemy\"):
 		e.queue_free()
 
-	# Boss spawnen (stationär auf der Chest)
+	# Boss spawnen
 	if boss_scene:
 		await get_tree().create_timer(boss_spawn_delay).timeout
 		var boss := boss_scene.instantiate()
@@ -95,7 +92,7 @@ func _on_base_died() -> void:
 		if boss.has_signal(\"died\"):
 			boss.connect(\"died\", Callable(self, \"_on_boss_died\"))
 
-	# Hände/Beams aus den Markern starten
+	# Hände/Beams aus den Markern
 	_start_hand_phase()
 
 func _start_hand_phase() -> void:
