@@ -8,6 +8,12 @@ extends CharacterBody2D
 @export var potion_scene: PackedScene
 @export var potion_datas: Array[PotionPickup] = []
 
+@export var ally_scene: PackedScene
+@export var ally_datas: Array[AllyPickup] = []
+
+@export var potion_drop_chance = 0.50
+@export var item_drop_chance = .30
+
 @onready var _rng := RandomNumberGenerator.new()
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
@@ -93,9 +99,34 @@ func takeDamage(amount:float):
 		death()
 
 func death():
-	drop_potion()
+	if _rng.randf() < potion_drop_chance:
+		drop_potion()
+
+	elif _rng.randf() < item_drop_chance:
+		drop_ally()
+	
 	queue_free()
 	
+
+func drop_ally():
+	if ally_datas == null:
+		return
+	#_rng.randi_range(0, ally_datas.size()-1)
+	var chosen = ally_datas[0]
+	
+	if chosen == null:
+		return
+	var pickup = ally_scene.instantiate()
+	
+	pickup.ally = chosen
+	
+	pickup.global_position = global_position
+	var parent = get_parent()
+	
+	if parent:
+		parent.add_child(pickup)
+	else:
+		get_tree().current_scene.add_child(pickup)
 
 func drop_potion() -> void:
 	if potion_datas == null:
