@@ -14,6 +14,6 @@ func _process(float) -> void:
 	updateStats()
 
 func updateStats() -> void:
-	damage_label.text = "Damage: %s" % [player.damage]
-	speed_label.text = "Speed: %s" % [str(player.moveSpeed)]
+	damage_label.text = "Damage: %.1f" % [player.damage]
+	speed_label.text = "Speed: %.1f" % [player.moveSpeed]
 	attack_speed_label.text = "Attack speed: " + str(player.attackSpeed)

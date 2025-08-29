@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cipxlme86wwt4"]
+[gd_scene load_steps=18 format=3 uid="uid://cipxlme86wwt4"]
 
 [ext_resource type="Script" uid="uid://cxg1hx0nbde5g" path="res://scripts/enemies/slime.gd" id="1_rldp6"]
 [ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="2_7uxu4"]
@@ -9,6 +9,9 @@
 [ext_resource type="Resource" uid="uid://n6h8f35s86yn" path="res://Resources/Items/Potions/attackSpeedPotion.tres" id="6_wfyvu"]
 [ext_resource type="Resource" uid="uid://bgo87hnekokhe" path="res://Resources/Items/Potions/healthPotion.tres" id="7_at850"]
 [ext_resource type="Resource" uid="uid://qp8qwtpfswk3" path="res://Resources/Items/Potions/energyPotion.tres" id="8_wbf5k"]
+[ext_resource type="PackedScene" uid="uid://dffup1pi0n4m" path="res://scenes/collectables/Allies/Allies.tscn" id="9_jjup5"]
+[ext_resource type="Script" uid="uid://5geu8475batk" path="res://scripts/collectables/Allies/AllyPickup.gd" id="10_wfyvu"]
+[ext_resource type="Resource" uid="uid://bpfdxlfw67xk7" path="res://Resources/Items/Allies/Bow.tres" id="11_at850"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4h4y0"]
 atlas = ExtResource("2_ahq63")
@@ -47,6 +50,8 @@ collision_mask = 9
 script = ExtResource("1_rldp6")
 potion_scene = ExtResource("2_7uxu4")
 potion_datas = Array[ExtResource("3_mdcui")]([ExtResource("4_ikdmk"), ExtResource("5_jjup5"), ExtResource("6_wfyvu"), ExtResource("7_at850"), ExtResource("8_wbf5k"), null])
+ally_scene = ExtResource("9_jjup5")
+ally_datas = Array[ExtResource("10_wfyvu")]([ExtResource("11_at850")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)

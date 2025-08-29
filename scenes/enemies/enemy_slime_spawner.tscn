@@ -1,65 +1,137 @@
-[gd_scene load_steps=2 format=3 uid="uid://cyjo73r37gque"]
+[gd_scene load_steps=3 format=3 uid="uid://cyjo73r37gque"]
+
+[ext_resource type="PackedScene" uid="uid://cipxlme86wwt4" path="res://scenes/enemies/slime.tscn" id="1_gatna"]
 
 [sub_resource type="GDScript" id="GDScript_b2lj1"]
 script/source = "extends Node2D
 
+# --- Slime-Phase (vor Boss) ---
 @export var slime_scene: PackedScene
-@export var spawn_interval: float = 3.0
-@export var target_path: NodePath   #Target patg ist ChestTarget
+@export var slime_spawn_interval: float = 1.0
 
-@onready var timer: Timer = $Timer
+# --- Referenzen ---
+@export var target_path: NodePath          
+@export var player_path: NodePath         
+
+# --- Boss-Phase ---
+@export var boss_scene: PackedScene
+@export var boss_spawn_delay: float = 0.8
+@export var boss_spawn_offset: Vector2 = Vector2.ZERO
+
+# --- Hände/Beams in Boss-Phase ---
+@export var hand_scene: PackedScene  
+@export var hand_fire_interval: float = 1.0
+
+@onready var slime_timer: Timer = $Timer
+var hand_timer: Timer
+
 @onready var target: Node2D = get_node_or_null(target_path)
+var player: Node2D
 
 var spawn_points: Array[Marker2D] = []
+var _boss_spawned := false
 
 func _ready() -> void:
 	randomize()
 
-	# Fallback auf node Szenengruppe \"Base\"
+	# Ziel/Base
 	if target == null:
 		target = get_tree().get_first_node_in_group(\"base\") as Node2D
 
-	#Falls target \"died\" stoppt das spawnen
+	# Player
+	if player_path != NodePath():
+		player = get_node_or_null(player_path)
+	if player == null:
+		player = get_tree().get_first_node_in_group(\"player\") as Node2D
+
+	# Auf Base-Tod hören
 	if target and target.has_signal(\"died\"):
 		var cb := Callable(self, \"_on_base_died\")
 		if not target.is_connected(\"died\", cb):
 			target.connect(\"died\", cb)
-	print(\"Spawner target:\", target)
 
+	# Marker einsammeln
 	for c in get_children():
 		if c is Marker2D:
 			spawn_points.append(c)
 
-	timer.wait_time = spawn_interval
-	if not timer.timeout.is_connected(_on_timer_timeout):
-		timer.timeout.connect(_on_timer_timeout)
-	timer.start()
+	# Slimes starten
+	slime_timer.wait_time = slime_spawn_interval
+	if not slime_timer.timeout.is_connected(_on_slime_timer):
+		slime_timer.timeout.connect(_on_slime_timer)
+	slime_timer.start()
 
-func _on_timer_timeout() -> void:
+func _on_slime_timer() -> void:
 	if spawn_points.is_empty() or slime_scene == null:
 		return
-
 	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
-	var slime = slime_scene.instantiate()
+	var slime := slime_scene.instantiate()
 	slime.global_position = spawn.global_position
-
 	get_tree().current_scene.add_child(slime)
 
 	if slime.has_method(\"set_target\") and target:
 		slime.set_target(target)
-	else:
-		push_warning(\"Slime hat keine set_target()-Methode/target fehlt\")
 
 func _on_base_died() -> void:
-	timer.stop()
-	print(\"Spawner stopped: base died.\")
-	# Gegner entfernen wenn \"base died\"
+	print(\"base died\")
+	if _boss_spawned:
+		return
+	_boss_spawned = true
+
+	# Slimes stoppen
+	slime_timer.stop()
 	for e in get_tree().get_nodes_in_group(\"enemy\"):
 		e.queue_free()
+
+	# Boss spawnen
+	if boss_scene:
+		print(\"boss spawned\")
+		await get_tree().create_timer(boss_spawn_delay).timeout
+		var boss := boss_scene.instantiate()
+		if is_instance_valid(target):
+			boss.global_position = target.global_position + boss_spawn_offset
+		get_tree().current_scene.add_child(boss)
+		if boss.has_signal(\"died\"):
+			boss.connect(\"died\", Callable(self, \"_on_boss_died\"))
+
+	# Hände/Beams aus den Markern
+	_start_hand_phase()
+
+func _start_hand_phase() -> void:
+	if hand_scene == null or spawn_points.is_empty():
+		push_warning(\"Kein hand_scene oder keine Marker vorhanden.\")
+		return
+
+	if hand_timer == null:
+		hand_timer = Timer.new()
+		hand_timer.name = \"HandTimer\"
+		add_child(hand_timer)
+	hand_timer.wait_time = hand_fire_interval
+	if not hand_timer.timeout.is_connected(_on_hand_timer):
+		hand_timer.timeout.connect(_on_hand_timer)
+	hand_timer.start()
+
+func _on_hand_timer() -> void:
+	if player == null or hand_scene == null or spawn_points.is_empty():
+		return
+
+	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
+	var bullet := hand_scene.instantiate()
+	get_tree().current_scene.add_child(bullet)
+
+	# Projektil Richtung Spieler schicken
+	if bullet.has_method(\"launch\"):
+		var dir := (player.global_position - spawn.global_position).normalized()
+		bullet.launch(spawn.global_position, dir)
+
+func _on_boss_died() -> void:
+	if hand_timer:
+		hand_timer.stop()
 "
 
 [node name="EnemySlimeSpawner" type="Node2D"]
 script = SubResource("GDScript_b2lj1")
+slime_scene = ExtResource("1_gatna")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

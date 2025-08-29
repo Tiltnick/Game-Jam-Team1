@@ -1,12 +1,18 @@
 extends CharacterBody2D
 
-@export var speed: float = 120.0
+@export var speed: float = 130.0
 @export var retarget_interval: float = 0.2
 @export var contact_damage: int = 1
 @export var attack_distance: float = 32.0
 
 @export var potion_scene: PackedScene
 @export var potion_datas: Array[PotionPickup] = []
+
+@export var ally_scene: PackedScene
+@export var ally_datas: Array[AllyPickup] = []
+
+@export var potion_drop_chance = 0.50
+@export var item_drop_chance = .30
 
 @onready var _rng := RandomNumberGenerator.new()
 
@@ -27,7 +33,7 @@ func _ready() -> void:
 	add_to_group("enemy")
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 
-	# Agent-Setup (kannst du anpassen)
+	# Agent-Setup
 	nav_agent.radius = 12.0
 	nav_agent.path_desired_distance = 10.0
 	nav_agent.target_desired_distance = 14.0
@@ -36,7 +42,7 @@ func _ready() -> void:
 	nav_agent.max_speed = speed
 	nav_agent.velocity_computed.connect(_on_nav_velocity_computed)
 
-	# Timer sicher verbinden
+	# Timer
 	if timer:
 		timer.wait_time = retarget_interval
 		if not timer.timeout.is_connected(_on_timer_timeout):
@@ -58,7 +64,6 @@ func _physics_process(_dt: float) -> void:
 	else:
 		_try_attack()
 
-	# extra Sicherheits-Trigger über Distanz
 	if is_instance_valid(player):
 		var d := global_position.distance_to(player.global_position)
 		if d <= attack_distance:
@@ -94,9 +99,34 @@ func takeDamage(amount:float):
 		death()
 
 func death():
-	drop_potion()
+	if _rng.randf() < potion_drop_chance:
+		drop_potion()
+
+	elif _rng.randf() < item_drop_chance:
+		drop_ally()
+	
 	queue_free()
 	
+
+func drop_ally():
+	if ally_datas == null:
+		return
+	#_rng.randi_range(0, ally_datas.size()-1)
+	var chosen = ally_datas[0]
+	
+	if chosen == null:
+		return
+	var pickup = ally_scene.instantiate()
+	
+	pickup.ally = chosen
+	
+	pickup.global_position = global_position
+	var parent = get_parent()
+	
+	if parent:
+		parent.add_child(pickup)
+	else:
+		get_tree().current_scene.add_child(pickup)
 
 func drop_potion() -> void:
 	if potion_datas == null:

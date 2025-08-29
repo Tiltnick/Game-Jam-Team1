@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://b8ik8d7s8evxs" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
 [ext_resource type="Script" uid="uid://bl2uy2ax0ogxn" path="res://scripts/player/state_attack.gd" id="8_v42im"]
 [ext_resource type="Script" uid="uid://b6kmf3b84lttk" path="res://scenes/player/stats_script.gd" id="9_pn6s4"]
-[ext_resource type="Script" uid="uid://dbei3773o86fi" path="res://scripts/player/state_hurt.gd" id="10_5stf6"]
-[ext_resource type="Script" uid="uid://dj0qk81jarhwk" path="res://scripts/player/state_death.gd" id="11_180ig"]
+[ext_resource type="Script" path="res://scripts/player/state_hurt.gd" id="10_5stf6"]
+[ext_resource type="Script" path="res://scripts/player/state_death.gd" id="11_180ig"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5stf6"]
 shader = ExtResource("2_7oing")
@@ -349,7 +349,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_v6fml"]
 radius = 15.1327
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_p0vlq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
