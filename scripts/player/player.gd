@@ -2,6 +2,18 @@ class_name Player extends CharacterBody2D
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var stateMachine:PlayerStateMachine = $StateMachine
+
+const final_moveSpeed:float = 200.0
+const final_max_health:float = 20.0
+const final_health: float = 10.0
+const final_attackSpeed:float = 50.0
+const final_damage:float = 1.0
+const final_max_energy:float = 5.0
+const final_energy:float = 3.0
+const final_attackCooldown: float = 1.0
+const final_dashCooldown: float = 1.0
+const final_projectile_speed:float = 700.0
+
 @export var moveSpeed:float = 200.0
 @export var max_health:float = 20.0
 @export var health: float = 10.0
@@ -10,13 +22,13 @@ class_name Player extends CharacterBody2D
 @export var max_energy:float = 5.0
 @export var energy:float = 3.0
 @export var attackCooldown: float = 1.0
-@onready var healthbar = get_parent().get_node("Health")
-@onready var energybar = get_parent().get_node("Energy")
 @export var dashCooldown: float = 1.0
+@export var projectile_speed:float = 700.0
 
 @onready var map = get_parent()
 
-@export var projectile_speed:float = 700.0
+@onready var healthbar = get_parent().get_node("Health")
+@onready var energybar = get_parent().get_node("Energy")
 
 @export var ice: PackedScene = preload("res://scenes/projectiles/ice.tscn")
 
@@ -36,6 +48,17 @@ var energy_timer: float = 0.0
 
 
 func _ready():
+	moveSpeed = final_moveSpeed
+	max_health  = final_max_health
+	health = final_health
+	attackSpeed = final_attackSpeed
+	damage = final_damage
+	max_energy = final_max_energy
+	energy = final_energy
+	attackCooldown = final_attackCooldown
+
+	dashCooldown = final_dashCooldown
+	projectile_speed = final_projectile_speed
 	stateMachine.initialize(self)
 	healthbar.update_hp(health, max_health)
 	energybar.update_energy(energy, max_energy)
@@ -54,6 +77,9 @@ func _process(_delta):
 		if energy_timer <= 0.0:
 			energy_active = false
 			map.set_ghost_mode(false)
+			attackCooldown = final_attackCooldown
+			$AnimatedSprite2D.material.set("shader_parameter/invert_colors", false)
+
 			print("Energy wieder aus")
 
 	# Taste Q drücken
@@ -149,8 +175,8 @@ func take_damage(amount: int) -> void:
 	healthbar.update_hp(health, max_health)
 
 func heal(amount: int) -> void:
-	health = min(health + amount, max_health)
-	healthbar.update_hp(health, max_health)
+	health = min(health + amount, final_max_health)
+	healthbar.update_hp(health, final_max_health)
 	
 
 func activate_energy():
@@ -161,4 +187,6 @@ func activate_energy():
 		energy_timer = energy_duration
 		map.set_ghost_mode(true) 
 		attackCooldown = 0.2
+		$AnimatedSprite2D.material.set("shader_parameter/invert_colors", true)
+
 		print("Energy aktiviert für ", energy_duration, " Sekunden")
