@@ -160,4 +160,5 @@ func activate_energy():
 		energy_active = true
 		energy_timer = energy_duration
 		map.set_ghost_mode(true) 
+		attackCooldown = 0.2
 		print("Energy aktiviert für ", energy_duration, " Sekunden")
