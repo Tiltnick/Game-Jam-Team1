@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd5sn54vebqyx"]
+[gd_scene load_steps=4 format=3 uid="uid://beg0d1kjxggmj"]
 
-[ext_resource type="Script" uid="uid://5q8dxm84iwdk" path="res://scripts/enemies/hand_bullet.gd" id="1_4h1n0"]
+[ext_resource type="Script" path="res://scripts/enemies/hand_bullet.gd" id="1_4h1n0"]
 [ext_resource type="Texture2D" uid="uid://c7eqwtrtjpyv8" path="res://assets/boss-hand.png" id="1_fg26d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4h1n0"]
