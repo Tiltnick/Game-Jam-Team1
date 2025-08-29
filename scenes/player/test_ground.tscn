@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bersbure40se"]
+[gd_scene load_steps=6 format=3 uid="uid://bersbure40se"]
 
 [ext_resource type="PackedScene" uid="uid://jvus7ev4ut28" path="res://scenes/health/health.tscn" id="1_06ksn"]
 [ext_resource type="PackedScene" uid="uid://d4bwkomgkcikx" path="res://scenes/player/Player.tscn" id="1_h3pbp"]
 [ext_resource type="PackedScene" uid="uid://vsuurcyxjdko" path="res://scenes/energy/energy.tscn" id="1_uiiow"]
 [ext_resource type="PackedScene" uid="uid://chftrriahs0cf" path="res://scenes/player/dummy.tscn" id="2_06ksn"]
+[ext_resource type="Script" uid="uid://chtdk0jracliq" path="res://scripts/game_over/game_over.gd" id="3_vvscq"]
 
 [node name="TestGround" type="Node2D"]
 
@@ -11,8 +12,40 @@
 
 [node name="Health" parent="." instance=ExtResource("1_06ksn")]
 
+[node name="GameOver" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("3_vvscq")
+
+[node name="Label" type="Label" parent="GameOver"]
+offset_left = 684.0
+offset_top = 241.0
+offset_right = 1197.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 50
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="GameOver"]
+offset_left = 3.0
+offset_top = -14.0
+offset_right = 1930.0
+offset_bottom = 1080.0
+
+[node name="Retry" type="Button" parent="GameOver"]
+offset_left = 830.0
+offset_top = 491.0
+offset_right = 1060.0
+offset_bottom = 555.0
+theme_override_font_sizes/font_size = 38
+text = "Retry"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_h3pbp")]
+z_index = 100
 
 [node name="Dummy" parent="." instance=ExtResource("2_06ksn")]
+
+[connection signal="pressed" from="GameOver/Retry" to="GameOver" method="_on_retry_pressed"]
