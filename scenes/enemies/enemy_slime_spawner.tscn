@@ -4,32 +4,38 @@
 script/source = "extends Node2D
 
 @export var slime_scene: PackedScene
-@export var spawn_interval: float = 3.0
-@export var target_path: NodePath   #Target patg ist ChestTarget
+@export var spawn_interval: float = 0.1
+@export var target_path: NodePath  
+
+# Boss
+@export var boss_scene: PackedScene          
+@export var boss_spawn_delay: float = 0.8
+@export var boss_spawn_offset: Vector2 = Vector2.ZERO
 
 @onready var timer: Timer = $Timer
 @onready var target: Node2D = get_node_or_null(target_path)
 
 var spawn_points: Array[Marker2D] = []
+var _boss_spawned := false
 
 func _ready() -> void:
 	randomize()
 
-	# Fallback auf node Szenengruppe \"Base\"
 	if target == null:
 		target = get_tree().get_first_node_in_group(\"base\") as Node2D
 
-	#Falls target \"died\" stoppt das spawnen
 	if target and target.has_signal(\"died\"):
 		var cb := Callable(self, \"_on_base_died\")
 		if not target.is_connected(\"died\", cb):
 			target.connect(\"died\", cb)
 	print(\"Spawner target:\", target)
 
+	# Spawnpunkte einsammeln
 	for c in get_children():
 		if c is Marker2D:
 			spawn_points.append(c)
 
+	# Timer verbinden
 	timer.wait_time = spawn_interval
 	if not timer.timeout.is_connected(_on_timer_timeout):
 		timer.timeout.connect(_on_timer_timeout)
@@ -40,7 +46,7 @@ func _on_timer_timeout() -> void:
 		return
 
 	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
-	var slime = slime_scene.instantiate()
+	var slime := slime_scene.instantiate()
 	slime.global_position = spawn.global_position
 
 	get_tree().current_scene.add_child(slime)
@@ -51,11 +57,41 @@ func _on_timer_timeout() -> void:
 		push_warning(\"Slime hat keine set_target()-Methode/target fehlt\")
 
 func _on_base_died() -> void:
+	if _boss_spawned:
+		return
+	_boss_spawned = true
+
 	timer.stop()
 	print(\"Spawner stopped: base died.\")
-	# Gegner entfernen wenn \"base died\"
+
+	# Normale Gegner entfernen (optional)
 	for e in get_tree().get_nodes_in_group(\"enemy\"):
 		e.queue_free()
+
+	# Boss spawnen
+	if boss_scene:
+		spawn_boss()
+	else:
+		push_warning(\"Kein 'boss_scene' zugewiesen – kein Boss-Spawn.\")
+
+func spawn_boss() -> void:
+	await get_tree().create_timer(boss_spawn_delay).timeout
+
+	var boss := boss_scene.instantiate()
+
+	# Auf Base-Position (plus Offset), falls Base-Node noch existiert
+	if is_instance_valid(target):
+		boss.global_position = target.global_position + boss_spawn_offset
+
+	get_tree().current_scene.add_child(boss)
+
+	# Optional: Player an Boss übergeben
+	var player := get_tree().get_first_node_in_group(\"player\") as Node2D
+	if player:
+		if boss.has_method(\"set_target\"):
+			boss.set_target(player)
+		elif \"player\" in boss:
+			boss.player = player
 "
 
 [node name="EnemySlimeSpawner" type="Node2D"]

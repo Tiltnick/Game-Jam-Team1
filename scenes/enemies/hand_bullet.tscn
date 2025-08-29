@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://bd5sn54vebqyx"]
+
+[ext_resource type="Script" uid="uid://5q8dxm84iwdk" path="res://scripts/enemies/hand_bullet.gd" id="1_4h1n0"]
+[ext_resource type="Texture2D" uid="uid://c7eqwtrtjpyv8" path="res://assets/boss-hand.png" id="1_fg26d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h1n0"]
+atlas = ExtResource("1_fg26d")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p8dk"]
+atlas = ExtResource("1_fg26d")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dq6x"]
+atlas = ExtResource("1_fg26d")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2dq6x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4h1n0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8p8dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dq6x")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fg26d"]
+radius = 12.0
+
+[node name="hand_bullet" type="Area2D"]
+collision_layer = 17
+script = ExtResource("1_4h1n0")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -13)
+scale = Vector2(1.75, 1.75)
+sprite_frames = SubResource("SpriteFrames_2dq6x")
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -12)
+shape = SubResource("CircleShape2D_fg26d")
+
+[node name="Lifetime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_hand_bullet_body_entered"]
+[connection signal="timeout" from="Lifetime" to="." method="_on_Lifetime_timeout"]
