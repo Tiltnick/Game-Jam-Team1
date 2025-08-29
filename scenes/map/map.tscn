@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://jvus7ev4ut28" path="res://scenes/health/health.tscn" id="6_sqgf4"]
 [ext_resource type="PackedScene" uid="uid://vsuurcyxjdko" path="res://scenes/energy/energy.tscn" id="6_vvrx0"]
 [ext_resource type="PackedScene" uid="uid://cipxlme86wwt4" path="res://scenes/enemies/slime.tscn" id="7_04w0f"]
-[ext_resource type="PackedScene" uid="uid://lh1tqikvgfun" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
+[ext_resource type="PackedScene" uid="uid://cyjo73r37gque" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
 [ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
 [ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="13_mgs8m"]
 
