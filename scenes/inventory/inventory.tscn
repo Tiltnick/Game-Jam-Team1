@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://nahw8lglg56t"]
+
+[ext_resource type="Texture2D" uid="uid://d2lud6igby5q6" path="res://assets/Bow_item.png" id="1_msrby"]
+[ext_resource type="Script" uid="uid://c4u2mjqjxylnd" path="res://scripts/inventory/bow_inventory.gd" id="2_4axmw"]
+
+[node name="Inventory" type="Node2D"]
+
+[node name="bow" type="Sprite2D" parent="."]
+texture = ExtResource("1_msrby")
+script = ExtResource("2_4axmw")

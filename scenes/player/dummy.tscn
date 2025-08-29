@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://chftrriahs0cf"]
+[gd_scene load_steps=7 format=3 uid="uid://chftrriahs0cf"]
 
 [ext_resource type="Texture2D" uid="uid://bnwpkpc2gq4jc" path="res://assets/Slime.png" id="1_2ckpl"]
 [ext_resource type="Script" uid="uid://bcgmdos3648vm" path="res://scripts/player/dummy.gd" id="1_ejrhf"]
@@ -21,6 +21,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yv0t"]
+size = Vector2(32, 29)
+
 [node name="Dummy" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_ejrhf")
 
@@ -32,3 +35,9 @@ shape = SubResource("RectangleShape2D_ejrhf")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)
 sprite_frames = SubResource("SpriteFrames_b3lcr")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_1yv0t")

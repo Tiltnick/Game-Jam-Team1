@@ -5,6 +5,8 @@ signal collected(potion: PotionPickup)
 @onready var player: Player
 @export var potion: PotionPickup
 
+
+
 func _ready() -> void:
 	$Sprite2D.texture = potion.texture
 	

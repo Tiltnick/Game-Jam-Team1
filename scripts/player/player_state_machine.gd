@@ -1,5 +1,7 @@
 class_name PlayerStateMachine extends Node
 
+@onready var hurt:State = $Hurt
+@onready var death:State = $Death
 var states:Array[State]
 var prevState:State
 var currentState:State
@@ -41,3 +43,11 @@ func changeState(newState:State) -> void:
 	prevState = currentState
 	currentState = newState
 	currentState.enter()
+
+
+func _on_player_took_damage() -> void:
+	changeState(hurt)
+
+
+func _on_player_death() -> void:
+	changeState(death)

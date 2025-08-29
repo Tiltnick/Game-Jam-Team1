@@ -10,11 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://d4bwkomgkcikx" path="res://scenes/player/Player.tscn" id="6_04w0f"]
 [ext_resource type="PackedScene" uid="uid://jvus7ev4ut28" path="res://scenes/health/health.tscn" id="6_sqgf4"]
 [ext_resource type="PackedScene" uid="uid://vsuurcyxjdko" path="res://scenes/energy/energy.tscn" id="6_vvrx0"]
-[ext_resource type="PackedScene" uid="uid://cyjo73r37gque" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
+[ext_resource type="PackedScene" uid="uid://cipxlme86wwt4" path="res://scenes/enemies/slime.tscn" id="7_04w0f"]
+[ext_resource type="PackedScene" uid="uid://lh1tqikvgfun" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
 [ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
-[ext_resource type="PackedScene" uid="uid://cvxhfsam1o8vh" path="res://scenes/enemies/boss.tscn" id="12_mrjnl"]
 [ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="13_mgs8m"]
-[ext_resource type="PackedScene" uid="uid://beg0d1kjxggmj" path="res://scenes/enemies/hand_bullet.tscn" id="13_rqo2c"]
+[ext_resource type="Script" uid="uid://chtdk0jracliq" path="res://scripts/game_over/game_over.gd" id="15_mrjnl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sqgf4"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1251,10 +1251,8 @@ tile_set = SubResource("TileSet_fcby6")
 navigation_polygon = SubResource("NavigationPolygon_04w0f")
 
 [node name="EnemySlimeSpawner" parent="." instance=ExtResource("8_sqgf4")]
+slime_scene = ExtResource("7_04w0f")
 target_path = NodePath("../Chest/ChestTarget")
-player_path = NodePath("../Player")
-boss_scene = ExtResource("12_mrjnl")
-hand_scene = ExtResource("13_rqo2c")
 
 [node name="Player" parent="." instance=ExtResource("6_04w0f")]
 z_index = 100
@@ -1262,6 +1260,7 @@ position = Vector2(-51.9876, -43.788)
 
 [node name="Potions" parent="." instance=ExtResource("13_mgs8m")]
 position = Vector2(200, 200)
+script = null
 
 [node name="UI" type="CanvasLayer" parent="."]
 visible = false
@@ -1273,3 +1272,34 @@ offset_left = -20.0
 offset_top = -75.0
 offset_right = 20.0
 offset_bottom = -52.0
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("15_mrjnl")
+
+[node name="Label" type="Label" parent="GameOver"]
+offset_left = 684.0
+offset_top = 241.0
+offset_right = 1197.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 50
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="GameOver"]
+offset_left = 3.0
+offset_top = -14.0
+offset_right = 1930.0
+offset_bottom = 1080.0
+
+[node name="Retry" type="Button" parent="GameOver"]
+offset_left = 830.0
+offset_top = 491.0
+offset_right = 1060.0
+offset_bottom = 555.0
+theme_override_font_sizes/font_size = 38
+text = "Retry"
+
+[connection signal="pressed" from="GameOver/Retry" to="GameOver" method="_on_retry_pressed"]

@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed:float = 300.0
+var speed:float = 400.0
 var direction:Vector2 = Vector2.RIGHT
 @onready var ani = $Animation
 @onready var sprite = $Sprite
@@ -9,6 +9,7 @@ var direction:Vector2 = Vector2.RIGHT
 var aniTimer:float = 0.22
 
 func _ready():
+	sprite.flip_h = true
 	sprite.play("hidden")
 	ani.play("spawn")
 

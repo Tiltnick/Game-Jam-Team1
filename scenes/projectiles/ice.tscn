@@ -134,6 +134,7 @@ size = Vector2(25.5, 19)
 script = ExtResource("1_7xcjf")
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
+z_index = 200
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_qctnd")
 animation = &"spawn"

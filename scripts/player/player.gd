@@ -2,6 +2,20 @@ class_name Player extends CharacterBody2D
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var stateMachine:PlayerStateMachine = $StateMachine
+
+const final_moveSpeed:float = 200.0
+const final_max_health:float = 20.0
+const final_health: float = 10.0
+const final_attackSpeed:float = 50.0
+const final_damage:float = 1.0
+const final_max_energy:float = 5.0
+const final_energy:float = 3.0
+const final_attackCooldown: float = 1.0
+const final_attackCooldown_ghost:float = 0.2
+const final_dashCooldown: float = 1.0
+const final_projectile_speed:float = 700.0
+const final_ghostMultiplier:float = 1.2
+
 @export var moveSpeed:float = 200.0
 @export var max_health:float = 20.0
 @export var health: float = 10.0
@@ -10,13 +24,16 @@ class_name Player extends CharacterBody2D
 @export var max_energy:float = 5.0
 @export var energy:float = 3.0
 @export var attackCooldown: float = 1.0
-@onready var healthbar = get_parent().get_node("Health")
-@onready var energybar = get_parent().get_node("Energy")
 @export var dashCooldown: float = 1.0
+@export var projectile_speed:float = 700.0
 
 @onready var map = get_parent()
 
-@export var projectile_speed:float = 700.0
+@onready var healthbar = get_parent().get_node("Health")
+@onready var energybar = get_parent().get_node("Energy")
+
+signal took_damage()
+signal death()
 
 @export var ice: PackedScene = preload("res://scenes/projectiles/ice.tscn")
 
@@ -30,12 +47,22 @@ var isFacing = Dir.DOWN
 
 var energy_active: bool = false
 var energy_timer: float = 0.0
-@export var energy_duration: float = 5.0
+@export var energy_duration: float = 4.0
 
 
 
 
 func _ready():
+	moveSpeed = final_moveSpeed
+	max_health  = final_max_health
+	health = final_health
+	attackSpeed = final_attackSpeed
+	damage = final_damage
+	max_energy = final_max_energy
+	energy = final_energy
+	attackCooldown = final_attackCooldown
+	dashCooldown = final_dashCooldown
+	projectile_speed = final_projectile_speed
 	stateMachine.initialize(self)
 	healthbar.update_hp(health, max_health)
 	energybar.update_energy(energy, max_energy)
@@ -43,6 +70,9 @@ func _ready():
 func _process(_delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	
+	if(health <= 0.0):
+		emit_signal("death")
 	
 	if(dashCooldownTimer > 0.0):
 		dashCooldownTimer -= _delta
@@ -54,6 +84,13 @@ func _process(_delta):
 		if energy_timer <= 0.0:
 			energy_active = false
 			map.set_ghost_mode(false)
+			attackCooldown = final_attackCooldown
+			damage /= final_ghostMultiplier
+			projectile_speed /= final_ghostMultiplier
+			moveSpeed /= final_ghostMultiplier
+			dashCooldown *= final_ghostMultiplier
+			$AnimatedSprite2D.material.set("shader_parameter/invert_colors", false)
+
 			print("Energy wieder aus")
 
 	# Taste Q drücken
@@ -111,7 +148,7 @@ func apply_potion(potion: PotionPickup) -> void:
 		"Energy":
 			energy = clamp(energy+potion.amount, 0.0, max_energy)
 		"Damage":
-			damage += 1
+			damage += potion.amount
 			print_debug("New damage:" + str(damage))
 		"Speed":
 			moveSpeed += potion.amount
@@ -147,10 +184,11 @@ func shoot(dir:Vector2):
 func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
 	healthbar.update_hp(health, max_health)
+	emit_signal("took_damage")
 
 func heal(amount: int) -> void:
-	health = min(health + amount, max_health)
-	healthbar.update_hp(health, max_health)
+	health = min(health + amount, final_max_health)
+	healthbar.update_hp(health, final_max_health)
 	
 
 func activate_energy():
@@ -160,4 +198,15 @@ func activate_energy():
 		energy_active = true
 		energy_timer = energy_duration
 		map.set_ghost_mode(true) 
+		attackCooldown = final_attackCooldown_ghost
+		damage *= final_ghostMultiplier
+		projectile_speed *= final_ghostMultiplier
+		moveSpeed *= final_ghostMultiplier
+		dashCooldown /= final_ghostMultiplier
+		$AnimatedSprite2D.material.set("shader_parameter/invert_colors", true)
+
 		print("Energy aktiviert für ", energy_duration, " Sekunden")
+
+func die() -> void:
+	var game_over_ui = get_tree().current_scene.get_node("GameOver")
+	game_over_ui.game_over()
