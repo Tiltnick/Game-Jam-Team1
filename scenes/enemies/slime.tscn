@@ -1,50 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://cipxlme86wwt4"]
+[gd_scene load_steps=8 format=3 uid="uid://bobx66c843jrx"]
 
-[ext_resource type="Script" uid="uid://c6imjdmani58t" path="res://scripts/enemies/enemies.gd" id="1_31ocp"]
-[ext_resource type="Texture2D" uid="uid://bbkhiyl2xq2cb" path="res://assets/Slime.png" id="2_31ocp"]
+[ext_resource type="Script" uid="uid://cxg1hx0nbde5g" path="res://scripts/enemies/slime.gd" id="1_rldp6"]
+[ext_resource type="Texture2D" uid="uid://bnwpkpc2gq4jc" path="res://assets/Slime.png" id="2_ahq63"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayqi8"]
-atlas = ExtResource("2_31ocp")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h4y0"]
+atlas = ExtResource("2_ahq63")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ctrou"]
-atlas = ExtResource("2_31ocp")
+[sub_resource type="AtlasTexture" id="AtlasTexture_b58ev"]
+atlas = ExtResource("2_ahq63")
 region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ygmqc"]
-atlas = ExtResource("2_31ocp")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ankfk"]
+atlas = ExtResource("2_ahq63")
 region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ygmqc"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_e12yk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ayqi8")
+"texture": SubResource("AtlasTexture_4h4y0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ctrou")
+"texture": SubResource("AtlasTexture_b58ev")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ygmqc")
+"texture": SubResource("AtlasTexture_ankfk")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pgpww"]
-radius = 12.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahq63"]
 
-[node name="Slime" type="CharacterBody2D"]
-script = ExtResource("1_31ocp")
+[node name="slime" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 9
+script = ExtResource("1_rldp6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24)
-sprite_frames = SubResource("SpriteFrames_ygmqc")
+sprite_frames = SubResource("SpriteFrames_e12yk")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.955887
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
-shape = SubResource("CircleShape2D_pgpww")
+shape = SubResource("RectangleShape2D_ahq63")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1

@@ -1,9 +1,68 @@
-[gd_scene load_steps=2 format=3 uid="uid://lh1tqikvgfun"]
+[gd_scene load_steps=2 format=3 uid="uid://cyjo73r37gque"]
 
-[ext_resource type="Script" uid="uid://bojwri4jkwhgr" path="res://scripts/enemies/enemy_slime_spawner.gd" id="1_gatna"]
+[sub_resource type="GDScript" id="GDScript_b2lj1"]
+script/source = "extends Node2D
+
+@export var slime_scene: PackedScene
+@export var spawn_interval: float = 3.0
+@export var target_path: NodePath   #Target patg ist ChestTarget
+
+@onready var timer: Timer = $Timer
+@onready var target: Node2D = get_node_or_null(target_path)
+
+var spawn_points: Array[Marker2D] = []
+
+func _ready() -> void:
+	randomize()
+
+	# Fallback auf node Szenengruppe \"Base\"
+	if target == null:
+		target = get_tree().get_first_node_in_group(\"base\") as Node2D
+
+	#Falls target \"died\" stoppt das spawnen
+	if target and target.has_signal(\"died\"):
+		var cb := Callable(self, \"_on_base_died\")
+		if not target.is_connected(\"died\", cb):
+			target.connect(\"died\", cb)
+	print(\"Spawner target:\", target)
+
+	for c in get_children():
+		if c is Marker2D:
+			spawn_points.append(c)
+
+	timer.wait_time = spawn_interval
+	if not timer.timeout.is_connected(_on_timer_timeout):
+		timer.timeout.connect(_on_timer_timeout)
+	timer.start()
+
+func _on_timer_timeout() -> void:
+	if spawn_points.is_empty() or slime_scene == null:
+		return
+
+	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
+	var slime = slime_scene.instantiate()
+	slime.global_position = spawn.global_position
+
+	get_tree().current_scene.add_child(slime)
+
+	if slime.has_method(\"set_target\") and target:
+		slime.set_target(target)
+	else:
+		push_warning(\"Slime hat keine set_target()-Methode/target fehlt\")
+
+func _on_base_died() -> void:
+	timer.stop()
+	print(\"Spawner stopped: base died.\")
+	# Gegner entfernen wenn \"base died\"
+	for e in get_tree().get_nodes_in_group(\"enemy\"):
+		e.queue_free()
+"
 
 [node name="EnemySlimeSpawner" type="Node2D"]
-script = ExtResource("1_gatna")
+script = SubResource("GDScript_b2lj1")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -510)
@@ -14,7 +73,11 @@ position = Vector2(900, -510)
 [node name="Marker2D3" type="Marker2D" parent="."]
 position = Vector2(-900, -510)
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="Marker2D4" type="Marker2D" parent="."]
+position = Vector2(-900, 510)
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="Marker2D5" type="Marker2D" parent="."]
+position = Vector2(0, 510)
+
+[node name="Marker2D6" type="Marker2D" parent="."]
+position = Vector2(900, 510)

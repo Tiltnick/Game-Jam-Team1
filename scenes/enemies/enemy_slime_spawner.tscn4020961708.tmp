@@ -1,0 +1,63 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyjo73r37gque"]
+
+[sub_resource type="GDScript" id="GDScript_b2lj1"]
+script/source = "# enemy_slime_spawner.gd
+extends Node2D
+
+@export var slime_scene: PackedScene
+@export var spawn_interval: float = 1.5
+@export var target_path: NodePath
+
+@onready var timer: Timer = $Timer
+@onready var target: Node2D = get_node_or_null(target_path)
+
+var spawn_points: Array[Marker2D] = []
+
+func _ready() -> void:
+	randomize()
+	if target == null:
+		target = get_tree().get_first_node_in_group(\"base\") as Node2D
+
+	for c in get_children():
+		if c is Marker2D:
+			spawn_points.append(c)
+
+	timer.wait_time = spawn_interval
+	timer.timeout.connect(_on_timer_timeout)
+	timer.start()
+
+func _on_timer_timeout() -> void:
+	if spawn_points.is_empty():
+		return
+
+	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
+	var slime = slime_scene.instantiate()
+
+	# Position zuerst
+	slime.global_position = spawn.global_position
+
+	# Ziel setzen VOR add_child
+	if slime.has_method(\"set_target\") and target:
+		slime.set_target(target)
+	else:
+		print(\"WARN: Kein Target gesetzt oder Slime hat set_target nicht.\")
+
+	get_tree().current_scene.add_child(slime)
+"
+
+[node name="EnemySlimeSpawner" type="Node2D"]
+script = SubResource("GDScript_b2lj1")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -510)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(900, -510)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+position = Vector2(-900, -510)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
