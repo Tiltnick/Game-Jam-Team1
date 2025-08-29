@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvxhfsam1o8vh"]
+[gd_scene load_steps=8 format=3 uid="uid://bdljtbnw4xo6n"]
 
 [ext_resource type="Texture2D" uid="uid://bxl41srow2pds" path="res://assets/boss-cloak.png" id="1_1ex25"]
 [ext_resource type="Script" uid="uid://bhopb2fyrn6kt" path="res://scripts/enemies/boss.gd" id="1_3uc6t"]
@@ -35,9 +35,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1ex25"]
 radius = 112.112
 
-[node name="Boss" type="CharacterBody2D"]
-collision_layer = 4
+[node name="Boss" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 5
 script = ExtResource("1_3uc6t")
+max_health = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7.62939e-06, -110)

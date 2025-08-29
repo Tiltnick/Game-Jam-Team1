@@ -16,7 +16,7 @@ func _ready() -> void:
 func _physics_process(_d: float) -> void:
 	velocity = Vector2.ZERO
 
-func take_damage(amount: int) -> void:
+func takeDamage(amount: int) -> void:
 	if amount <= 0 or health <= 0: return
 	health = max(0, health - amount)
 	# kurzes Trefferfeedback
@@ -25,4 +25,7 @@ func take_damage(amount: int) -> void:
 	modulate = Color(1, 1, 1)
 	if health == 0:
 		emit_signal("died")
+		var game_over_ui = get_tree().current_scene.get_node("Win")
+		print(game_over_ui)
+		game_over_ui.game_over()
 		queue_free()

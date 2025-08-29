@@ -36,4 +36,34 @@ offset_bottom = 555.0
 theme_override_font_sizes/font_size = 38
 text = "Retry"
 
+[node name="Win" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+script = ExtResource("2_rvslj")
+
+[node name="Label" type="Label" parent="Win"]
+offset_left = 684.0
+offset_top = 241.0
+offset_right = 1197.0
+offset_bottom = 513.0
+theme_override_font_sizes/font_size = 50
+text = "yiippii Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Win"]
+offset_left = 3.0
+offset_top = -14.0
+offset_right = 1930.0
+offset_bottom = 1080.0
+
+[node name="Retry" type="Button" parent="Win"]
+offset_left = 830.0
+offset_top = 491.0
+offset_right = 1060.0
+offset_bottom = 555.0
+theme_override_font_sizes/font_size = 38
+text = "Retry"
+
 [connection signal="pressed" from="GameOver/Retry" to="GameOver" method="_on_retry_pressed"]
+[connection signal="pressed" from="Win/Retry" to="Win" method="_on_retry_pressed"]
