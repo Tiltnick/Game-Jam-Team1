@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bobx66c843jrx"]
+[gd_scene load_steps=8 format=3 uid="uid://cipxlme86wwt4"]
 
 [ext_resource type="Script" uid="uid://cxg1hx0nbde5g" path="res://scripts/enemies/slime.gd" id="1_rldp6"]
 [ext_resource type="Texture2D" uid="uid://bnwpkpc2gq4jc" path="res://assets/Slime.png" id="2_ahq63"]
@@ -34,7 +34,7 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahq63"]
 
-[node name="slime" type="CharacterBody2D"]
+[node name="slime" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 5
 collision_mask = 9
 script = ExtResource("1_rldp6")

@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed:float = 200.0
+var speed:float = 300.0
 var direction:Vector2 = Vector2.RIGHT
 @onready var ani = $Animation
 @onready var sprite = $Sprite

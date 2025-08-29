@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 200.0
+@export var speed: float = 120.0
 @export var retarget_interval: float = 0.2
 @export var contact_damage: int = 1
 @export var attack_distance: float = 32.0
@@ -77,4 +77,14 @@ func _try_attack() -> void:
 	else:
 		print("[SLIME] Ziel hat keine take_damage-Methode!")
 
+	queue_free()
+
+@export var health = 3.0
+
+func takeDamage(amount:float):
+	health -= amount
+	if health <= 0.0:
+		death()
+
+func death():
 	queue_free()
