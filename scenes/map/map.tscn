@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=27 format=4 uid="uid://chi3yp36d6iuj"]
+=======
+[gd_scene load_steps=30 format=4 uid="uid://chi3yp36d6iuj"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" uid="uid://cj50yv8v7rg80" path="res://scripts/dimension/GhostWorld.gd" id="1_vvrx0"]
 [ext_resource type="Texture2D" uid="uid://btblf13vw5m5p" path="res://assets/dungeon.png" id="2_tqkkf"]
@@ -637,6 +641,29 @@ sources/0 = SubResource("TileSetAtlasSource_04w0f")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b56te"]
 size = Vector2(38, 36)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqo2c"]
+atlas = ExtResource("3_a2pkv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e07uo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqo2c")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sqgf4"]
 texture = ExtResource("4_fcby6")
 0:0/0 = 0
@@ -1214,6 +1241,12 @@ shape = SubResource("RectangleShape2D_b56te")
 
 [node name="ChestHPBar" type="Node2D" parent="Chest/ChestTarget"]
 script = ExtResource("4_b56te")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Chest/ChestTarget"]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_e07uo")
+animation = &"closed"
+autoplay = "closed"
 
 [node name="Collision" type="StaticBody2D" parent="."]
 

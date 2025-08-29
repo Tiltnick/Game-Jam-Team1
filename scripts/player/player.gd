@@ -66,7 +66,8 @@ func _ready():
 	stateMachine.initialize(self)
 	healthbar.update_hp(health, max_health)
 	energybar.update_energy(energy, max_energy)
-
+	$AnimatedSprite2D.material.set("shader_parameter/invert_colors", false)
+	
 func _process(_delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
