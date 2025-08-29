@@ -38,7 +38,6 @@ radius = 112.112
 [node name="Boss" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 5
 script = ExtResource("1_3uc6t")
-max_health = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7.62939e-06, -110)

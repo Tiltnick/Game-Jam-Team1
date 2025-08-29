@@ -1,7 +1,7 @@
 [gd_scene load_steps=50 format=3 uid="uid://d4bwkomgkcikx"]
 
 [ext_resource type="Script" uid="uid://cgua41j78jkpc" path="res://scripts/player/player.gd" id="1_p0vlq"]
-[ext_resource type="Shader" path="res://scenes/player/Player.gdshader" id="2_7oing"]
+[ext_resource type="Shader" uid="uid://bdbl7tv4btjo0" path="res://scenes/player/Player.gdshader" id="2_7oing"]
 [ext_resource type="Texture2D" uid="uid://dsc6002rdt7av" path="res://assets/PlayerSprite02.png" id="2_npwbq"]
 [ext_resource type="Texture2D" uid="uid://b6q6pbf2o42ed" path="res://assets/ExamplePlayerSprite.png" id="2_v6fml"]
 [ext_resource type="Script" uid="uid://coa0ecucrq4lj" path="res://scripts/player/player_state_machine.gd" id="3_4kuee"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://cnw7oue47b763" path="res://scripts/player/state_walk.gd" id="5_tpg5x"]
 [ext_resource type="Script" uid="uid://b8ik8d7s8evxs" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
 [ext_resource type="Script" uid="uid://bl2uy2ax0ogxn" path="res://scripts/player/state_attack.gd" id="8_v42im"]
-[ext_resource type="Script" path="res://scenes/player/stats_script.gd" id="9_pn6s4"]
+[ext_resource type="Script" uid="uid://b6kmf3b84lttk" path="res://scenes/player/stats_script.gd" id="9_pn6s4"]
 [ext_resource type="Script" path="res://scripts/player/state_hurt.gd" id="10_5stf6"]
 [ext_resource type="Script" path="res://scripts/player/state_death.gd" id="11_180ig"]
 

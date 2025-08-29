@@ -7,7 +7,7 @@ script/source = "extends Node2D
 
 # --- Slime-Phase (vor Boss) ---
 @export var slime_scene: PackedScene
-@export var slime_spawn_interval: float = 0.5
+@export var slime_spawn_interval: float = 1.0
 
 # --- Referenzen ---
 @export var target_path: NodePath          

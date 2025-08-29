@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 500.0
+@export var speed: float = 130.0
 @export var retarget_interval: float = 0.2
 @export var contact_damage: int = 1
 @export var attack_distance: float = 32.0
