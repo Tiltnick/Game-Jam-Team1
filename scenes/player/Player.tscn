@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://d4bwkomgkcikx"]
+[gd_scene load_steps=45 format=3 uid="uid://d4bwkomgkcikx"]
 
 [ext_resource type="Script" uid="uid://cgua41j78jkpc" path="res://scripts/player/player.gd" id="1_p0vlq"]
 [ext_resource type="Texture2D" uid="uid://dsc6002rdt7av" path="res://assets/PlayerSprite02.png" id="2_npwbq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cnw7oue47b763" path="res://scripts/player/state_walk.gd" id="5_tpg5x"]
 [ext_resource type="Script" uid="uid://b8ik8d7s8evxs" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
 [ext_resource type="Script" uid="uid://bl2uy2ax0ogxn" path="res://scripts/player/state_attack.gd" id="8_v42im"]
+[ext_resource type="Script" path="res://scenes/player/stats_script.gd" id="9_pn6s4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qjgm"]
 atlas = ExtResource("2_npwbq")
@@ -337,7 +338,6 @@ position = Vector2(-5.96046e-08, -33)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_x2u8p")
 animation = &"Attack"
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_v6fml")
@@ -359,3 +359,39 @@ script = ExtResource("6_c3xxp")
 script = ExtResource("8_v42im")
 
 [node name="Hurt" type="Node" parent="StateMachine"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="StatsRoot" type="Control" parent="HUD" node_paths=PackedStringArray("player", "damage_label", "speed_label", "attack_speed_label")]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+script = ExtResource("9_pn6s4")
+player = NodePath("../..")
+damage_label = NodePath("MarginContainer/StatsBox/DamageLabel")
+speed_label = NodePath("MarginContainer/StatsBox/SpeedLabel")
+attack_speed_label = NodePath("MarginContainer/StatsBox/AttackSpeedLabel")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/StatsRoot"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 10
+
+[node name="StatsBox" type="VBoxContainer" parent="HUD/StatsRoot/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DamageLabel" type="Label" parent="HUD/StatsRoot/MarginContainer/StatsBox"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="HUD/StatsRoot/MarginContainer/StatsBox"]
+layout_mode = 2
+
+[node name="AttackSpeedLabel" type="Label" parent="HUD/StatsRoot/MarginContainer/StatsBox"]
+layout_mode = 2
