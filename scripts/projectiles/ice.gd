@@ -6,7 +6,7 @@ var direction:Vector2 = Vector2.RIGHT
 @onready var sprite = $Sprite
 @export var damage:float = 1.0
 
-var aniTimer:float = 0.2
+var aniTimer:float = 0.22
 
 func _ready():
 	sprite.play("hidden")

@@ -114,7 +114,6 @@ func centerPosition() -> Vector2:
 
 func shoot(dir:Vector2):
 	var projectile = ice.instantiate()
-	
 	get_parent().add_child(projectile)
 	projectile.global_position = centerPosition()
 	projectile.direction = dir

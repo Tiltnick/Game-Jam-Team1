@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var health = 10.0
+@export var health = 3.0
 
 func takeDamage(amount:float):
 	health -= amount
