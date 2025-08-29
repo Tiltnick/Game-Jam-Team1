@@ -32,6 +32,9 @@ const final_ghostMultiplier:float = 1.2
 @onready var healthbar = get_parent().get_node("Health")
 @onready var energybar = get_parent().get_node("Energy")
 
+signal took_damage()
+signal death()
+
 @export var ice: PackedScene = preload("res://scenes/projectiles/ice.tscn")
 
 var dashCooldownTimer: float = 0.0
@@ -67,6 +70,9 @@ func _ready():
 func _process(_delta):
 	direction.x = Input.get_action_strength("right") - Input.get_action_strength("left")
 	direction.y = Input.get_action_strength("down") - Input.get_action_strength("up")
+	
+	if(health <= 0.0):
+		emit_signal("death")
 	
 	if(dashCooldownTimer > 0.0):
 		dashCooldownTimer -= _delta
@@ -178,6 +184,7 @@ func shoot(dir:Vector2):
 func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
 	healthbar.update_hp(health, max_health)
+	emit_signal("took_damage")
 
 func heal(amount: int) -> void:
 	health = min(health + amount, final_max_health)
@@ -199,3 +206,7 @@ func activate_energy():
 		$AnimatedSprite2D.material.set("shader_parameter/invert_colors", true)
 
 		print("Energy aktiviert für ", energy_duration, " Sekunden")
+
+func die() -> void:
+	var game_over_ui = get_tree().current_scene.get_node("GameOver")
+	game_over_ui.game_over()
