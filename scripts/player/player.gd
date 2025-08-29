@@ -143,7 +143,7 @@ func apply_potion(potion: PotionPickup) -> void:
 		"Energy":
 			energy = clamp(energy+potion.amount, 0.0, max_energy)
 		"Damage":
-			damage += 1
+			damage += potion.amount
 			print_debug("New damage:" + str(damage))
 		"Speed":
 			moveSpeed += potion.amount

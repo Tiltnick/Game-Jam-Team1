@@ -1,5 +1,6 @@
 extends Control
 
+class_name Stats
 
 @export var player: Player
 @export var damage_label: Label
@@ -7,6 +8,9 @@ extends Control
 @export var attack_speed_label: Label
 
 func _ready() -> void:
+	updateStats()
+
+func _process(float) -> void:
 	updateStats()
 
 func updateStats() -> void:
