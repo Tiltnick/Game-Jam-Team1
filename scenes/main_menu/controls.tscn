@@ -1,0 +1,184 @@
+[gd_scene load_steps=9 format=3 uid="uid://g73fmijlipav"]
+
+[ext_resource type="Script" uid="uid://dyucy5xufodig" path="res://scripts/main_menu/controls.gd" id="1_ii0nr"]
+[ext_resource type="Texture2D" uid="uid://b7kdjxvkvvgvv" path="res://assets/main_menu.png" id="1_ml3j1"]
+[ext_resource type="FontFile" uid="uid://uubsoe03lru1" path="res://assets/GrapeSoda.ttf" id="2_c731i"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c731i"]
+texture = ExtResource("1_ml3j1")
+modulate_color = Color(0.808998, 0.808998, 0.808998, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c731i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ii0nr"]
+bg_color = Color(0.687215, 0.687215, 0.687215, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_us64t"]
+bg_color = Color(0.601223, 0.601223, 0.601223, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoi5p"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ii0nr")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_c731i")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.5
+offset_top = -200.0
+offset_right = 174.5
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_c731i")
+theme_override_font_sizes/font_size = 60
+text = "Move = W,A,S,D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.0
+offset_top = -117.0
+offset_right = 197.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_c731i")
+theme_override_font_sizes/font_size = 60
+text = "Dash = Spacebar"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -197.0
+offset_top = -39.0
+offset_right = 197.0
+offset_bottom = 147.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_c731i")
+theme_override_font_sizes/font_size = 60
+text = "Shoot = left click"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.5
+offset_top = 49.0
+offset_right = 245.5
+offset_bottom = 235.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_c731i")
+theme_override_font_sizes/font_size = 60
+text = "Dimension switch = Q"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -355.0
+offset_right = 122.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 10
+theme_override_fonts/font = ExtResource("2_c731i")
+theme_override_font_sizes/font_size = 101
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -158.5
+offset_top = -281.0
+offset_right = 158.5
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxEmpty_c731i")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ii0nr")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_us64t")
+theme_override_styles/normal = SubResource("StyleBoxFlat_aoi5p")
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_back_pressed"]

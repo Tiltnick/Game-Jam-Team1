@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
 [ext_resource type="PackedScene" uid="uid://bdljtbnw4xo6n" path="res://scenes/enemies/boss.tscn" id="12_mrjnl"]
 [ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="13_mgs8m"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/hand_bullet.tscn" id="13_rqo2c"]
+[ext_resource type="PackedScene" uid="uid://beg0d1kjxggmj" path="res://scenes/enemies/hand_bullet.tscn" id="13_rqo2c"]
 [ext_resource type="Script" uid="uid://chtdk0jracliq" path="res://scripts/game_over/game_over.gd" id="15_mrjnl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sqgf4"]
@@ -23,7 +23,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 agent_radius = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fcby6"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rqo2c"]
 texture = ExtResource("2_tqkkf")
 0:0/0 = 0
 0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_sqgf4")
@@ -604,9 +604,9 @@ texture = ExtResource("2_tqkkf")
 
 [sub_resource type="TileSet" id="TileSet_a2pkv"]
 navigation_layer_0/layers = 1
-sources/0 = SubResource("TileSetAtlasSource_fcby6")
+sources/0 = SubResource("TileSetAtlasSource_rqo2c")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_04w0f"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e07uo"]
 texture = ExtResource("3_a2pkv")
 5:0/0 = 0
 6:0/0 = 0
@@ -633,12 +633,12 @@ texture = ExtResource("3_a2pkv")
 
 [sub_resource type="TileSet" id="TileSet_ph54e"]
 navigation_layer_0/layers = 2
-sources/0 = SubResource("TileSetAtlasSource_04w0f")
+sources/0 = SubResource("TileSetAtlasSource_e07uo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b56te"]
 size = Vector2(38, 36)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sqgf4"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58ndj"]
 texture = ExtResource("4_fcby6")
 0:0/0 = 0
 1:0/0 = 0
@@ -1154,9 +1154,9 @@ texture = ExtResource("4_fcby6")
 31:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_04w0f"]
-sources/0 = SubResource("TileSetAtlasSource_sqgf4")
+sources/0 = SubResource("TileSetAtlasSource_58ndj")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvrx0"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nykyp"]
 texture = ExtResource("5_jcaow")
 5:0/0 = 0
 6:0/0 = 0
@@ -1182,7 +1182,7 @@ texture = ExtResource("5_jcaow")
 7:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_fcby6"]
-sources/0 = SubResource("TileSetAtlasSource_vvrx0")
+sources/0 = SubResource("TileSetAtlasSource_nykyp")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_04w0f"]
 vertices = PackedVector2Array(948, 532, -948, 532, -948, -532, 948, -532)
