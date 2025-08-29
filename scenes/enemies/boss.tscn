@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdljtbnw4xo6n"]
+[gd_scene load_steps=8 format=3 uid="uid://b3u803nrhx4d8"]
 
 [ext_resource type="Texture2D" uid="uid://bxl41srow2pds" path="res://assets/boss-cloak.png" id="1_1ex25"]
-[ext_resource type="Script" uid="uid://bhopb2fyrn6kt" path="res://scripts/enemies/boss.gd" id="1_3uc6t"]
+[ext_resource type="Script" path="res://scripts/enemies/boss.gd" id="1_3uc6t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uc6t"]
 atlas = ExtResource("1_1ex25")

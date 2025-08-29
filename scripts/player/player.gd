@@ -5,7 +5,7 @@ class_name Player extends CharacterBody2D
 
 const final_moveSpeed:float = 200.0
 const final_max_health:float = 20.0
-const final_health: float = 1.0
+const final_health: float = 10.0
 const final_attackSpeed:float = 50.0
 const final_damage:float = 1.0
 const final_max_energy:float = 5.0
@@ -18,7 +18,7 @@ const final_ghostMultiplier:float = 1.2
 
 @export var moveSpeed:float = 200.0
 @export var max_health:float = 20.0
-@export var health: float = 1.0
+@export var health: float = 10.0
 @export var attackSpeed:float = 50.0
 @export var damage:float = 1.0
 @export var max_energy:float = 5.0

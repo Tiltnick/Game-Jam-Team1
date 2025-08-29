@@ -12,9 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://vsuurcyxjdko" path="res://scenes/energy/energy.tscn" id="6_vvrx0"]
 [ext_resource type="PackedScene" uid="uid://cyjo73r37gque" path="res://scenes/enemies/enemy_slime_spawner.tscn" id="8_sqgf4"]
 [ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
-[ext_resource type="PackedScene" uid="uid://bdljtbnw4xo6n" path="res://scenes/enemies/boss.tscn" id="12_mrjnl"]
+[ext_resource type="PackedScene" uid="uid://b3u803nrhx4d8" path="res://scenes/enemies/boss.tscn" id="12_mrjnl"]
 [ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="13_mgs8m"]
-[ext_resource type="PackedScene" path="res://scenes/enemies/hand_bullet.tscn" id="13_rqo2c"]
+[ext_resource type="PackedScene" uid="uid://beg0d1kjxggmj" path="res://scenes/enemies/hand_bullet.tscn" id="13_rqo2c"]
 [ext_resource type="Script" uid="uid://chtdk0jracliq" path="res://scripts/game_over/game_over.gd" id="15_mrjnl"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sqgf4"]
