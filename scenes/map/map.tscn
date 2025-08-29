@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://chi3yp36d6iuj"]
+[gd_scene load_steps=28 format=4 uid="uid://chi3yp36d6iuj"]
 
 [ext_resource type="Script" uid="uid://cj50yv8v7rg80" path="res://scripts/dimension/GhostWorld.gd" id="1_vvrx0"]
 [ext_resource type="Texture2D" uid="uid://btblf13vw5m5p" path="res://assets/dungeon.png" id="2_tqkkf"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://cek06kp6vh5xu" path="res://scripts/BaseChest/ui_chest_hp.gd" id="10_f17u5"]
 [ext_resource type="PackedScene" uid="uid://co5b3e2cmveku" path="res://scenes/enemies/boss.tscn" id="12_mrjnl"]
 [ext_resource type="PackedScene" uid="uid://b2bhy0ungi1k8" path="res://scenes/collectables/potions/Potions.tscn" id="13_mgs8m"]
+[ext_resource type="PackedScene" uid="uid://bd5sn54vebqyx" path="res://scenes/enemies/hand_bullet.tscn" id="13_rqo2c"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_sqgf4"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1254,6 +1255,7 @@ navigation_polygon = SubResource("NavigationPolygon_04w0f")
 slime_scene = ExtResource("7_04w0f")
 target_path = NodePath("../Chest/ChestTarget")
 boss_scene = ExtResource("12_mrjnl")
+hand_scene = ExtResource("13_rqo2c")
 
 [node name="Player" parent="." instance=ExtResource("6_04w0f")]
 z_index = 100

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://co5b3e2cmveku"]
+[gd_scene load_steps=8 format=3 uid="uid://co5b3e2cmveku"]
 
 [ext_resource type="Texture2D" uid="uid://bxl41srow2pds" path="res://assets/boss-cloak.png" id="1_1ex25"]
 [ext_resource type="Script" uid="uid://bhopb2fyrn6kt" path="res://scripts/enemies/boss.gd" id="1_3uc6t"]
-[ext_resource type="PackedScene" uid="uid://bd5sn54vebqyx" path="res://scenes/enemies/hand_bullet.tscn" id="2_ub7yk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uc6t"]
 atlas = ExtResource("1_1ex25")
@@ -39,7 +38,6 @@ radius = 112.112
 [node name="Boss" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_3uc6t")
-projectile_scene = ExtResource("2_ub7yk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7.62939e-06, -110)
@@ -47,7 +45,7 @@ scale = Vector2(3.29688, 3.29688)
 sprite_frames = SubResource("SpriteFrames_yye4w")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.216773
+frame_progress = 0.229296
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -79)

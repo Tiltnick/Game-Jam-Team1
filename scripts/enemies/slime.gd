@@ -1,90 +1,65 @@
+# res://scripts/enemies/slime.gd
 extends CharacterBody2D
 
-@export var speed: float = 500.0
+@export var speed: float = 1000.0
 @export var retarget_interval: float = 0.2
 @export var contact_damage: int = 1
-@export var attack_distance: float = 32.0
+@export var attack_cooldown: float = 0.6
 
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var timer: Timer = $Timer
+@onready var retarget_timer: Timer = get_node_or_null("RetargetTimer")
+@onready var attack_timer: Timer = get_node_or_null("AttackTimer")
 
-var player: Node2D = null     # Ziel (ChestTarget)
-var _has_attacked: bool = false
+var target: Node2D
 
 func set_target(t: Node2D) -> void:
-	player = t
-	if is_instance_valid(player) and nav_agent:
-		nav_agent.target_position = player.global_position
+	target = t
+	if is_instance_valid(target):
+		nav_agent.target_position = target.global_position
 
 func _ready() -> void:
 	add_to_group("enemy")
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
-
-	# Agent-Setup (kannst du anpassen)
 	nav_agent.radius = 12.0
 	nav_agent.path_desired_distance = 10.0
-	nav_agent.target_desired_distance = 14.0
+	nav_agent.target_desired_distance = 16.0
 	nav_agent.path_postprocessing = NavigationPathQueryParameters2D.PATH_POSTPROCESSING_CORRIDORFUNNEL
 	nav_agent.avoidance_enabled = true
 	nav_agent.max_speed = speed
-	nav_agent.velocity_computed.connect(_on_nav_velocity_computed)
+	if not nav_agent.velocity_computed.is_connected(_on_nav_velocity_computed):
+		nav_agent.velocity_computed.connect(_on_nav_velocity_computed)
 
-	# Timer sicher verbinden
-	if timer:
-		timer.wait_time = retarget_interval
-		if not timer.timeout.is_connected(_on_timer_timeout):
-			timer.timeout.connect(_on_timer_timeout)
-		timer.start()
+	if retarget_timer == null:
+		retarget_timer = Timer.new(); retarget_timer.name = "RetargetTimer"; add_child(retarget_timer)
+	retarget_timer.wait_time = retarget_interval
+	if not retarget_timer.timeout.is_connected(_on_retarget):
+		retarget_timer.timeout.connect(_on_retarget)
+	retarget_timer.start()
 
-func _process(_dt: float) -> void:
-	if is_instance_valid(player):
-		nav_agent.target_position = player.global_position
+	if attack_timer == null:
+		attack_timer = Timer.new(); attack_timer.name = "AttackTimer"; add_child(attack_timer)
+	attack_timer.wait_time = attack_cooldown
+	attack_timer.one_shot = true
 
-func _physics_process(_dt: float) -> void:
-	if player == null or _has_attacked:
-		return
-
-	if not nav_agent.is_navigation_finished():
-		var next_pos := nav_agent.get_next_path_position()
-		var desired := (next_pos - global_position).normalized() * speed
-		nav_agent.set_velocity(desired)
-	else:
+func _physics_process(_d: float) -> void:
+	if target == null:
+		velocity = Vector2.ZERO; move_and_slide(); return
+	if nav_agent.is_navigation_finished():
+		velocity = Vector2.ZERO; move_and_slide(); _try_attack(); return
+	var next_pos := nav_agent.get_next_path_position()
+	var desired := (next_pos - global_position).normalized() * speed
+	nav_agent.set_velocity(desired)
+	if global_position.distance_to(nav_agent.target_position) <= nav_agent.target_desired_distance + 4.0:
 		_try_attack()
 
-	# extra Sicherheits-Trigger über Distanz
-	if is_instance_valid(player):
-		var d := global_position.distance_to(player.global_position)
-		if d <= attack_distance:
-			_try_attack()
+func _on_nav_velocity_computed(v: Vector2) -> void:
+	velocity = v; move_and_slide()
 
-func _on_nav_velocity_computed(safe_velocity: Vector2) -> void:
-	velocity = safe_velocity
-	move_and_slide()
-
-func _on_timer_timeout() -> void:
-	if is_instance_valid(player):
-		if nav_agent.target_position.distance_to(player.global_position) > 2.0:
-			nav_agent.target_position = player.global_position
+func _on_retarget() -> void:
+	if target: nav_agent.target_position = target.global_position
 
 func _try_attack() -> void:
-	if _has_attacked or player == null:
-		return
-	_has_attacked = true
-
-	print("[SLIME] try attack -> has take_damage():", player.has_method("take_damage"))
-	if player.has_method("take_damage"):
-		player.take_damage(contact_damage)
-	else:
-		print("[SLIME] Ziel hat keine take_damage-Methode!")
-
-	queue_free()
-
-@export var health = 3.0
-
-func takeDamage(amount:float):
-	health -= amount
-	if health <= 0.0:
-		death()
-
-func death():
-	queue_free()
+	if attack_timer.time_left > 0.0: return
+	if target and target.has_method("take_damage"):
+		target.take_damage(contact_damage)
+	attack_timer.start()
