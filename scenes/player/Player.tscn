@@ -1,7 +1,8 @@
-[gd_scene load_steps=50 format=3 uid="uid://d4bwkomgkcikx"]
+[gd_scene load_steps=52 format=3 uid="uid://d4bwkomgkcikx"]
 
 [ext_resource type="Script" uid="uid://cgua41j78jkpc" path="res://scripts/player/player.gd" id="1_p0vlq"]
 [ext_resource type="Shader" uid="uid://bdbl7tv4btjo0" path="res://scenes/player/Player.gdshader" id="2_7oing"]
+[ext_resource type="Script" uid="uid://dcfyqfa0n2i1m" path="res://scripts/player/upperhitbox.gd" id="2_20koh"]
 [ext_resource type="Texture2D" uid="uid://dsc6002rdt7av" path="res://assets/PlayerSprite02.png" id="2_npwbq"]
 [ext_resource type="Texture2D" uid="uid://b6q6pbf2o42ed" path="res://assets/ExamplePlayerSprite.png" id="2_v6fml"]
 [ext_resource type="Script" uid="uid://coa0ecucrq4lj" path="res://scripts/player/player_state_machine.gd" id="3_4kuee"]
@@ -10,8 +11,11 @@
 [ext_resource type="Script" uid="uid://b8ik8d7s8evxs" path="res://scripts/player/state_dash.gd" id="6_c3xxp"]
 [ext_resource type="Script" uid="uid://bl2uy2ax0ogxn" path="res://scripts/player/state_attack.gd" id="8_v42im"]
 [ext_resource type="Script" uid="uid://b6kmf3b84lttk" path="res://scenes/player/stats_script.gd" id="9_pn6s4"]
-[ext_resource type="Script" path="res://scripts/player/state_hurt.gd" id="10_5stf6"]
-[ext_resource type="Script" path="res://scripts/player/state_death.gd" id="11_180ig"]
+[ext_resource type="Script" uid="uid://dbei3773o86fi" path="res://scripts/player/state_hurt.gd" id="10_5stf6"]
+[ext_resource type="Script" uid="uid://dj0qk81jarhwk" path="res://scripts/player/state_death.gd" id="11_180ig"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_180ig"]
+size = Vector2(20, 81)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5stf6"]
 shader = ExtResource("2_7oing")
@@ -351,6 +355,13 @@ radius = 15.1327
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_p0vlq")
+
+[node name="UpperHitbox" type="Area2D" parent="." groups=["player"]]
+script = ExtResource("2_20koh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperHitbox"]
+position = Vector2(0, -30.5)
+shape = SubResource("RectangleShape2D_180ig")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_5stf6")
