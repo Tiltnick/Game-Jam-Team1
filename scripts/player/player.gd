@@ -6,7 +6,7 @@ class_name Player extends CharacterBody2D
 @export var max_health:float = 20.0
 @export var health: float = 10.0
 @export var attackSpeed:float = 50.0
-@export var damage:float = 50.0
+@export var damage:float = 1.0
 @export var max_energy:float = 5.0
 @export var energy:float = 3.0
 @export var attackCooldown: float = 1.0
@@ -111,7 +111,7 @@ func apply_potion(potion: PotionPickup) -> void:
 		"Energy":
 			energy = clamp(energy+potion.amount, 0.0, max_energy)
 		"Damage":
-			damage += potion.amount
+			damage += 1
 			print_debug("New damage:" + str(damage))
 		"Speed":
 			moveSpeed += potion.amount
@@ -135,7 +135,9 @@ func centerPosition() -> Vector2:
 
 func shoot(dir:Vector2):
 	var projectile = ice.instantiate()
+	
 	get_parent().add_child(projectile)
+	projectile.damage = damage
 	projectile.global_position = centerPosition()
 	projectile.direction = dir
 	projectile.speed = projectile_speed
