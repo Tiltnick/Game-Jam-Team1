@@ -5,6 +5,11 @@ extends CharacterBody2D
 @export var contact_damage: int = 1
 @export var attack_distance: float = 32.0
 
+@export var potion_scene: PackedScene
+@export var potion_datas: Array[PotionPickup] = []
+
+@onready var _rng := RandomNumberGenerator.new()
+
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var timer: Timer = $Timer
 
@@ -17,6 +22,8 @@ func set_target(t: Node2D) -> void:
 		nav_agent.target_position = player.global_position
 
 func _ready() -> void:
+	_rng.randomize()
+	
 	add_to_group("enemy")
 	motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 
@@ -87,4 +94,27 @@ func takeDamage(amount:float):
 		death()
 
 func death():
+	drop_potion()
 	queue_free()
+	
+
+func drop_potion() -> void:
+	if potion_datas == null:
+		return
+	
+	var chosen = potion_datas[_rng.randi_range(0, potion_datas.size()-1)]
+	
+	if chosen == null:
+		return
+	
+	var pickup = potion_scene.instantiate()
+	
+	pickup.potion = chosen
+	
+	pickup.global_position = global_position
+	var parent = get_parent()
+	
+	if parent:
+		parent.add_child(pickup)
+	else:
+		get_tree().current_scene.add_child(pickup)
