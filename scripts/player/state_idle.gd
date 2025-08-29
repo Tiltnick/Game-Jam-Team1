@@ -20,6 +20,6 @@ func physics(_delta:float) -> State:
 	return null
 
 func handleInput(_event:InputEvent) -> State:
-	if (_event.is_action_pressed("interact") && player.attackCooldownTimer <= 0.0):
+	if (_event.is_action_pressed("interact")):
 		return attack
 	return null

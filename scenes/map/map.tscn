@@ -1226,13 +1226,12 @@ tile_set = SubResource("TileSet_fcby6")
 
 [node name="Health" parent="." instance=ExtResource("6_sqgf4")]
 
-[node name="Player" parent="." instance=ExtResource("6_04w0f")]
-position = Vector2(-51.9876, -43.788)
-
 [node name="SlimePath" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_04w0f")]
 position = Vector2(874, 123)
 motion_mode = 1
 player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("6_04w0f")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_04w0f")
