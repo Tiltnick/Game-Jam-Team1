@@ -123,4 +123,3 @@ func take_damage(amount: int) -> void:
 func heal(amount: int) -> void:
 	health = min(health + amount, max_health)
 	healthbar.update_hp(health, max_health)
-	
