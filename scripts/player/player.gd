@@ -156,6 +156,8 @@ func apply_potion(potion: PotionPickup) -> void:
 			moveSpeed += potion.amount
 		"AttackSpeed":
 			attackSpeed += potion.amount
+			attackCooldown -= 0.09
+			projectile_speed += 50
 		#add attackCooldown later
 
 var bowNumber = 0
