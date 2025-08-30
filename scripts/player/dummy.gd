@@ -15,8 +15,6 @@ func takeDamage(amount:float):
 func death():
 	queue_free()
 
-func _on_body_entered(body):
-	player.take_damage(1)
 
 func _process(delta):
 	var bodies = area.get_overlapping_bodies()

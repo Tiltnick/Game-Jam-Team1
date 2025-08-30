@@ -1,0 +1,77 @@
+[gd_scene load_steps=18 format=3 uid="uid://dkhkspff51eiw"]
+
+[ext_resource type="Script" uid="uid://4qcgmlootkjn" path="res://scripts/enemies/slime2.gd" id="1_ugt2b"]
+[ext_resource type="Script" uid="uid://dsi6huvk01akg" path="res://scripts/collectables/potions/PotionPickup.gd" id="3_fbne2"]
+[ext_resource type="Resource" uid="uid://ccy2nba33yei3" path="res://Resources/Items/Potions/dmgPotion.tres" id="4_jbvd1"]
+[ext_resource type="Resource" uid="uid://p5k3r4jm0xm" path="res://Resources/Items/Potions/speedPotion.tres" id="5_a7kuv"]
+[ext_resource type="Resource" uid="uid://n6h8f35s86yn" path="res://Resources/Items/Potions/attackSpeedPotion.tres" id="6_ejvqq"]
+[ext_resource type="Resource" uid="uid://bgo87hnekokhe" path="res://Resources/Items/Potions/healthPotion.tres" id="7_dl4dn"]
+[ext_resource type="Resource" uid="uid://qp8qwtpfswk3" path="res://Resources/Items/Potions/energyPotion.tres" id="8_wya7n"]
+[ext_resource type="Script" uid="uid://5geu8475batk" path="res://scripts/collectables/Allies/AllyPickup.gd" id="10_eurse"]
+[ext_resource type="PackedScene" uid="uid://d4bwkomgkcikx" path="res://scenes/player/Player.tscn" id="10_mc37k"]
+[ext_resource type="Resource" uid="uid://bpfdxlfw67xk7" path="res://Resources/Items/Allies/Bow.tres" id="11_yns8p"]
+[ext_resource type="Texture2D" uid="uid://bnwpkpc2gq4jc" path="res://assets/Slime.png" id="12_brmvv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4h4y0"]
+atlas = ExtResource("12_brmvv")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b58ev"]
+atlas = ExtResource("12_brmvv")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ankfk"]
+atlas = ExtResource("12_brmvv")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e12yk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4h4y0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b58ev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ankfk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahq63"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mc37k"]
+size = Vector2(24, 22.5)
+
+[node name="slime2" type="CharacterBody2D" groups=["enemies"]]
+collision_layer = 5
+collision_mask = 9
+script = ExtResource("1_ugt2b")
+potion_datas = Array[ExtResource("3_fbne2")]([ExtResource("4_jbvd1"), ExtResource("5_a7kuv"), ExtResource("6_ejvqq"), ExtResource("7_dl4dn"), ExtResource("8_wya7n"), null])
+ally_datas = Array[ExtResource("10_eurse")]([ExtResource("11_yns8p")])
+playerTarget = ExtResource("10_mc37k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -24)
+sprite_frames = SubResource("SpriteFrames_e12yk")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_ahq63")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -11.75)
+shape = SubResource("RectangleShape2D_mc37k")
