@@ -7,11 +7,15 @@ script/source = "extends Node2D
 
 # --- Slime-Phase (vor Boss) ---
 @export var slime_scene: PackedScene
-@export var slime_spawn_interval: float = 1.0
+
+# Intervall slime
+@export var slime_spawn_interval_start: float = 1.5   
+@export var slime_spawn_interval_min:   float = 0.8  
+@export var slime_ramp_seconds:         float = 40.0  
 
 # --- Referenzen ---
-@export var target_path: NodePath          
-@export var player_path: NodePath         
+@export var target_path: NodePath
+@export var player_path: NodePath
 
 # --- Boss-Phase ---
 @export var boss_scene: PackedScene
@@ -19,17 +23,20 @@ script/source = "extends Node2D
 @export var boss_spawn_offset: Vector2 = Vector2.ZERO
 
 # --- Hände/Beams in Boss-Phase ---
-@export var hand_scene: PackedScene  
+@export var hand_scene: PackedScene
 @export var hand_fire_interval: float = 0.3
 
 @onready var slime_timer: Timer = $Timer
-var hand_timer: Timer
+var hand_timer: Timer = null
 
 @onready var target: Node2D = get_node_or_null(target_path)
-var player: Node2D
+var player: Node2D = null
 
 var spawn_points: Array[Marker2D] = []
-var _boss_spawned := false
+var _boss_spawned: bool = false
+
+var _slime_phase_time: float = 0.0
+
 
 func _ready() -> void:
 	randomize()
@@ -56,14 +63,30 @@ func _ready() -> void:
 			spawn_points.append(c)
 
 	# Slimes starten
-	slime_timer.wait_time = slime_spawn_interval
+	slime_timer.wait_time = slime_spawn_interval_start
 	if not slime_timer.timeout.is_connected(_on_slime_timer):
 		slime_timer.timeout.connect(_on_slime_timer)
 	slime_timer.start()
 
+
+func _process(delta: float) -> void:
+	# Zeit während der Slime-Phase
+	if not _boss_spawned:
+		_slime_phase_time += delta
+
+
+func _current_slime_interval() -> float:
+	# Linear
+	var t: float = _slime_phase_time / max(0.001, slime_ramp_seconds)
+	if t < 0.0: t = 0.0
+	if t > 1.0: t = 1.0
+	return slime_spawn_interval_start + (slime_spawn_interval_min - slime_spawn_interval_start) * t
+
+
 func _on_slime_timer() -> void:
-	if spawn_points.is_empty() or slime_scene == null:
+	if spawn_points.is_empty() or slime_scene == null or _boss_spawned:
 		return
+
 	var spawn: Marker2D = spawn_points[randi() % spawn_points.size()]
 	var slime := slime_scene.instantiate()
 	slime.global_position = spawn.global_position
@@ -71,21 +94,23 @@ func _on_slime_timer() -> void:
 
 	if slime.has_method(\"set_target\") and target:
 		slime.set_target(target)
+	slime_timer.wait_time = _current_slime_interval()
+	slime_timer.start()  
+
 
 func _on_base_died() -> void:
-	print(\"base died\")
 	if _boss_spawned:
 		return
 	_boss_spawned = true
 
-	# Slimes stoppen
+	# Slimes stoppen und aufräumen
 	slime_timer.stop()
 	for e in get_tree().get_nodes_in_group(\"enemy\"):
-		e.queue_free()
+		if is_instance_valid(e):
+			(e as Node).queue_free()
 
 	# Boss spawnen
 	if boss_scene:
-		print(\"boss spawned\")
 		await get_tree().create_timer(boss_spawn_delay).timeout
 		var boss := boss_scene.instantiate()
 		if is_instance_valid(target):
@@ -94,8 +119,9 @@ func _on_base_died() -> void:
 		if boss.has_signal(\"died\"):
 			boss.connect(\"died\", Callable(self, \"_on_boss_died\"))
 
-	# Hände/Beams aus den Markern
+	# Hände/Beams aus den Markern starten
 	_start_hand_phase()
+
 
 func _start_hand_phase() -> void:
 	if hand_scene == null or spawn_points.is_empty():
@@ -106,10 +132,12 @@ func _start_hand_phase() -> void:
 		hand_timer = Timer.new()
 		hand_timer.name = \"HandTimer\"
 		add_child(hand_timer)
+
 	hand_timer.wait_time = hand_fire_interval
 	if not hand_timer.timeout.is_connected(_on_hand_timer):
 		hand_timer.timeout.connect(_on_hand_timer)
 	hand_timer.start()
+
 
 func _on_hand_timer() -> void:
 	if player == null or hand_scene == null or spawn_points.is_empty():
@@ -121,8 +149,9 @@ func _on_hand_timer() -> void:
 
 	# Projektil Richtung Spieler schicken
 	if bullet.has_method(\"launch\"):
-		var dir := (player.global_position - spawn.global_position).normalized()
+		var dir: Vector2 = (player.global_position - spawn.global_position).normalized()
 		bullet.launch(spawn.global_position, dir)
+
 
 func _on_boss_died() -> void:
 	if hand_timer:
