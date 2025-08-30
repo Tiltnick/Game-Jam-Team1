@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game-Jam-Team-1"
-run/main_scene="uid://teoxn5wbbw44"
+run/main_scene="uid://dtyheb3je6t8q"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -79,3 +79,4 @@ interact={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true

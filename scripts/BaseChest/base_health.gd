@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var max_health: int = 20
+@export var max_health: int = 40
 @export var damage_per_hit: int = 1
 var health: int
 

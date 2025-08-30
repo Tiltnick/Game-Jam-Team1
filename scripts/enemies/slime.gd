@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 130.0
+@export var speed: float = 100.0
 @export var retarget_interval: float = 0.2
 @export var contact_damage: int = 1
 @export var attack_distance: float = 32.0
@@ -11,8 +11,8 @@ extends CharacterBody2D
 @export var ally_scene: PackedScene
 @export var ally_datas: Array[AllyPickup] = []
 
-@export var potion_drop_chance = 0.50
-@export var item_drop_chance = .30
+@export var potion_drop_chance = 0.70
+@export var item_drop_chance = .00
 
 @onready var _rng := RandomNumberGenerator.new()
 
@@ -91,7 +91,7 @@ func _try_attack() -> void:
 
 	queue_free()
 
-@export var health = 3.0
+@export var health = 2.0
 
 func takeDamage(amount:float):
 	health -= amount

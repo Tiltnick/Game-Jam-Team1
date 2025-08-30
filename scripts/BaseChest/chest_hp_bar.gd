@@ -1,7 +1,7 @@
 extends Node2D
 @export var width := 28
 @export var height := 4
-@export var y_offset := -20
+@export var y_offset := -30
 var _cur := 0
 var _max := 1
 func set_value(cur: int, maxv: int) -> void:

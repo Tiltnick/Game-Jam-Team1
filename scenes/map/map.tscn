@@ -1249,6 +1249,7 @@ tile_set = SubResource("TileSet_fcby6")
 [node name="Health" parent="." instance=ExtResource("6_sqgf4")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_04w0f")
 
 [node name="GameOver" type="CanvasLayer" parent="."]
@@ -1281,6 +1282,7 @@ theme_override_font_sizes/font_size = 38
 text = "Retry"
 
 [node name="EnemySlimeSpawner" parent="." instance=ExtResource("8_sqgf4")]
+visible = false
 target_path = NodePath("../Chest/ChestTarget")
 player_path = NodePath("../Player")
 boss_scene = ExtResource("12_mrjnl")

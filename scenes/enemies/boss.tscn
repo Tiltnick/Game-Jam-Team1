@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3u803nrhx4d8"]
+[gd_scene load_steps=9 format=3 uid="uid://b3u803nrhx4d8"]
 
 [ext_resource type="Texture2D" uid="uid://bxl41srow2pds" path="res://assets/boss-cloak.png" id="1_1ex25"]
 [ext_resource type="Script" uid="uid://bhopb2fyrn6kt" path="res://scripts/enemies/boss.gd" id="1_3uc6t"]
+[ext_resource type="Script" uid="uid://bmu61otfukgp2" path="res://scripts/enemies/bossbar.gd" id="2_ub7yk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3uc6t"]
 atlas = ExtResource("1_1ex25")
@@ -38,6 +39,11 @@ radius = 112.112
 [node name="Boss" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 5
 script = ExtResource("1_3uc6t")
+
+[node name="BossHPBar" type="Node2D" parent="."]
+z_index = 1680
+position = Vector2(0, -7.62939e-06)
+script = ExtResource("2_ub7yk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-7.62939e-06, -110)

@@ -24,7 +24,7 @@ var player: Node2D = null     # Ziel (ChestTarget)
 var _has_attacked: bool = false
 
 func set_target(t: Node2D) -> void:
-	player = t
+	player = get_tree().player
 	if is_instance_valid(player) and nav_agent:
 		nav_agent.target_position = player.global_position
 
