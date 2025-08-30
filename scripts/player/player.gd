@@ -8,8 +8,8 @@ const final_max_health:float = 20.0
 const final_health: float = 10.0
 const final_attackSpeed:float = 50.0
 const final_damage:float = 1.0
-const final_max_energy:float = 5.0
-const final_energy:float = 3.0
+const final_max_energy:float = 6.0
+const final_energy:float = 2.0
 const final_attackCooldown: float = 1.0
 const final_attackCooldown_ghost:float = 0.2
 const final_dashCooldown: float = 1.0
@@ -21,8 +21,8 @@ const final_ghostMultiplier:float = 1.2
 @export var health: float = 10.0
 @export var attackSpeed:float = 50.0
 @export var damage:float = 1.0
-@export var max_energy:float = 5.0
-@export var energy:float = 3.0
+@export var max_energy:float = 6.0
+@export var energy:float = 2.0
 @export var attackCooldown: float = 1.0
 @export var dashCooldown: float = 1.0
 @export var projectile_speed:float = 700.0
@@ -194,8 +194,8 @@ func heal(amount: int) -> void:
 	
 
 func activate_energy():
-	if energy > 0 and not energy_active:
-		energy -= 1
+	if energy > 1 and not energy_active:
+		energy -= 2
 		energybar.update_energy(energy, max_energy)
 		energy_active = true
 		energy_timer = energy_duration

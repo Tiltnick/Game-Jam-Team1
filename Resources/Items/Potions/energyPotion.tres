@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_trkt0")
 type = "Energy"
-amount = 10.0
+amount = 2.0
 texture = ExtResource("2_2uhun")
 metadata/_custom_type_script = "uid://dsi6huvk01akg"
