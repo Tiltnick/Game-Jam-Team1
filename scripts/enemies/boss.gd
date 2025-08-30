@@ -1,7 +1,7 @@
 # res://scripts/enemies/boss.gd
 extends CharacterBody2D
 
-@export var max_health: int = 100
+@export var max_health: int = 300
 signal died
 @onready var hp_bar: Node = get_node_or_null("BossHPBar")
 var health: int

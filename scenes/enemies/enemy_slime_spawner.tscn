@@ -20,7 +20,7 @@ script/source = "extends Node2D
 
 # --- Hände/Beams in Boss-Phase ---
 @export var hand_scene: PackedScene  
-@export var hand_fire_interval: float = 0.5
+@export var hand_fire_interval: float = 0.3
 
 @onready var slime_timer: Timer = $Timer
 var hand_timer: Timer
