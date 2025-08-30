@@ -25,7 +25,7 @@ offset_left = -919.0
 offset_top = -1091.0
 offset_right = -789.0
 offset_bottom = -1069.0
-scale = Vector2(3, 3)
+scale = Vector2(4.5, 4.5)
 alignment = 1
 
 [node name="Heart" parent="Control/HFlowContainer" instance=ExtResource("2_stopl")]

@@ -20,11 +20,11 @@ grow_vertical = 2
 
 [node name="HFlowContainer" type="HFlowContainer" parent="Control"]
 layout_mode = 0
-offset_left = 1426.0
-offset_top = -1317.0
-offset_right = 1556.0
-offset_bottom = -1304.0
-scale = Vector2(3, 3)
+offset_left = -246.0
+offset_top = -1270.0
+offset_right = -116.0
+offset_bottom = -1257.0
+scale = Vector2(4.5, 4.5)
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
 alignment = 1
