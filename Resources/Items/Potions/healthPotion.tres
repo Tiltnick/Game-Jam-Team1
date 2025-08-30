@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_heqbs")
 type = "Heal"
-amount = 1.0
+amount = 2.0
 texture = ExtResource("2_heqbs")
 metadata/_custom_type_script = "uid://dsi6huvk01akg"
